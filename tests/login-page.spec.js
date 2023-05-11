@@ -63,3 +63,43 @@ test.describe("Source test suit", () => {
     page,
   }) => {});
 });
+
+test.describe("Login form test suit", () => {
+  test("when username and password are entered correctly user should be logged in", async ({
+    page,
+  }) => {});
+
+  test("when entered username is incorrect should display error message", async ({
+    page,
+  }) => {});
+  test("when entered password is incorrect should display error message", async ({
+    page,
+  }) => {});
+  test("when username and password fields are empty should display error message", async ({
+    page,
+  }) => {});
+  test("when entered less than 6 characters in username or password fields should display error about range of characters", async ({
+    page,
+  }) => {});
+  test("when user tried to login with correct credentials from two different browsers at same time, authorization should succeed", async ({
+    page,
+  }) => {});
+  test("when user tried to login with incorrect credentials from another browser, authorization should unsuccessful", async ({
+    page,
+  }) => {});
+  test("when error message is triggered should display rectangle red block with error message", async ({
+    page,
+  }) => {});
+  test("when error message is triggered rectangle block with error message should contain X button from right upper corner", async ({
+    page,
+  }) => {});
+  test("when X button is pressed in error message block all hints should disappears", async ({
+    page,
+  }) => {});
+  test("when refresh button pressed all credentials should be erased", async ({
+    page,
+  }) => {});
+  test("when user is already logged in back button should return user to login page with empty username and password fields", async ({
+    page,
+  }) => {});
+});
