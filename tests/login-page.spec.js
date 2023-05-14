@@ -1,105 +1,168 @@
 const { test, expect } = require("@playwright/test");
 
-// Swag Labs Login page test suite
+// Swag Labs Login page Functional tests
 
-test.describe("Basic browsers and URL test suite", () => {
-  test("when user go to Swag Labs Login page search input should contain URL", async ({
+test.describe("Login page Swag Labs Functional tests", () => {
+  test("when Swag Labs login page is downloaded she should contain login logo on the top of the screen", async ({
     page,
   }) => {});
 
-  test("when user entered incorrect URL should expect error", async ({
+  test("when login page is downloaded she should contain login From in the middle section", async ({
     page,
   }) => {});
 
-  test("when Login page already downloaded browser window should have title 'Swag Labs'", async ({
+  test("when login page is downloaded login From should contain Username, Password fields & Login button", async ({
     page,
   }) => {});
 
-  test("when Swag Labs Login page is downloaded URL should begin from 'https:' secure protocol", async ({
+  test("when login page is downloaded Username field should displaying with placeholder 'Username'", async ({
     page,
   }) => {});
 
-  test("when Swag Labs URL is entered into search input page loading should be less than 10 seconds", async ({
+  test("when login page is downloaded Password field should displaying with placeholder 'Password'", async ({
     page,
   }) => {});
 
-  test("when page loading is finished page should have EN language", async ({
+  test("when field with placeholder was fill with any symbol placeholder should be hidden", async ({
     page,
   }) => {});
 
-  test("when browser get html file response should have 'utf-8' value in meta tag", async ({
+  test("when login page is downloaded Login button should contain text 'Login'", async ({
+    page,
+  }) => {});
+
+  test("when login page is downloaded she should contain credential data at the bottom", async ({
+    page,
+  }) => {});
+
+  test("when loaded is finished credential block should composed of two parts: Accepted usernames & Password for all users", async ({
+    page,
+  }) => {});
+
+  test("when loaded is finished credential block should contain text", async ({
+    page,
+  }) => {});
+
+  test("when loaded is finished area around Login From should to be not clickable", async ({
+    page,
+  }) => {});
+
+  test("when cursor situated in Login button area Login button should not change own statement on hover", async ({
+    page,
+  }) => {});
+
+  test("when cursor situated in Login button area cursor should change his statement pointer", async ({
+    page,
+  }) => {});
+
+  test("when cursor is focused on Username or Password field he should be transform into text cursor", async ({
+    page,
+  }) => {});
+
+  test("when Login From displaying error message, X button should situated on the right upper corner", async ({
+    page,
+  }) => {});
+
+  test("when incorrect credentials entered in Login from, X button in error message block should close hint about mistake", async ({
+    page,
+  }) => {});
+
+  test("when incorrect credentials entered in Login from, X circles symbols should be displayed on opposite side from credential", async ({
+    page,
+  }) => {});
+
+  test("when user is pressed on X button in error message hint should be hidden without erasing incorrect credentials", async ({
     page,
   }) => {});
 });
 
-test.describe("Network test suit", () => {
-  test("when page loading is finished all requests should have status code 200", async ({
+// Swag Labs Graphical User Interface tests
+
+test.describe("Login page Swag Labs GUI tests", () => {
+  test("when login page already rendered Login From should has white background", async ({
     page,
   }) => {});
 
-  test("when page loading is finished all requests should have time for request less than 500 ms with good internet connection", async ({
+  test("when login page already rendered Credential block should has black background", async ({
     page,
   }) => {});
 
-  test("when page loading is finished all requests should have time for request less than 5000 ms with bad internet connection", async ({
+  test("when login page already rendered Login button should be green", async ({
     page,
   }) => {});
+
+  test("when Login From displaying error message rectangle with message should has red background", async ({
+    page,
+  }) => {});
+
+  test("when Login From displaying error message X button on the right upper corner of red rectangle should be white", async ({
+    page,
+  }) => {});
+
+  //   test("when login page already rendered Login button should be green", async ({
+  //     page,
+  //   }) => {});
+  //   test("when login page already rendered Login button should be green", async ({
+  //     page,
+  //   }) => {});
 });
 
-test.describe("Source test suit", () => {
-  test("when page loading is finished all javascript files should have .js extensions", async ({
+// Positive & Negative Login from scenarios
+
+test.describe("Swag Labs Data tests", () => {
+  test("when Login button pressed without entered credentials should display error message for user", async ({
     page,
   }) => {});
 
-  test("when page loading is finished all css files should have .css extensions", async ({
+  test("when user entered ONLY username without password should display error message", async ({
     page,
   }) => {});
 
-  test("when page loading is finished all files with fonts should have one of available extensions: woff2, ttf", async ({
+  test("when user entered ONLY password without username should display error message", async ({
     page,
   }) => {});
 
-  test("when page loading is finished manifest file should have extension .json", async ({
+  test("when user entered incorrect username should display error message", async ({
     page,
   }) => {});
-});
 
-test.describe("Login form test suit", () => {
+  test("when user entered incorrect password should display error message", async ({
+    page,
+  }) => {});
+
+  test("when user entered ONLY correct username without password should display error message", async ({
+    page,
+  }) => {});
+
+  test("when user entered ONLY correct password without username should display error message", async ({
+    page,
+  }) => {});
+
   test("when username and password are entered correctly user should be logged in", async ({
     page,
   }) => {});
 
-  test("when entered username is incorrect should display error message", async ({
+  test("when entered more than 50 characters inside username or password field should not display error message", async ({
     page,
   }) => {});
-  test("when entered password is incorrect should display error message", async ({
+
+  test("when user refresh the page Login Form credentials should be erased", async ({
     page,
   }) => {});
-  test("when username and password fields are empty should display error message", async ({
+
+  test("when user is already logged in back button should return user to login page with empty Login Form", async ({
     page,
   }) => {});
-  test("when entered less than 6 characters in username or password fields should display error about range of characters", async ({
+
+  test("when problem_user was logged browser should display warning modal window about data leak", async ({
     page,
   }) => {});
-  test("when user tried to login with correct credentials from two different browsers at same time, authorization should succeed", async ({
+
+  test("when performance_glitch user was logged Login button should be disabled", async ({
     page,
   }) => {});
-  test("when user tried to login with incorrect credentials from another browser, authorization should unsuccessful", async ({
-    page,
-  }) => {});
-  test("when error message is triggered should display rectangle red block with error message", async ({
-    page,
-  }) => {});
-  test("when error message is triggered rectangle block with error message should contain X button from right upper corner", async ({
-    page,
-  }) => {});
-  test("when X button is pressed in error message block all hints should disappears", async ({
-    page,
-  }) => {});
-  test("when refresh button pressed all credentials should be erased", async ({
-    page,
-  }) => {});
-  test("when user is already logged in back button should return user to login page with empty username and password fields", async ({
+
+  test("when performance_glitch user was logged cursor should be pointer until loading process is not finished", async ({
     page,
   }) => {});
 });
