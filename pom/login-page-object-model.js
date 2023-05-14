@@ -19,5 +19,4 @@ exports.SwagLabsLoginPage = class SwagLabsLoginPage {
     await this.page.goto("/");
   }
 
-  
 };
