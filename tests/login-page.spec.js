@@ -1,39 +1,109 @@
 const { test, expect } = require("@playwright/test");
+const { SwagLabsLoginPage } = require("../pom/login-page-object-model");
 
 // Swag Labs Login page Functional tests
 
 test.describe("Login page Swag Labs Functional tests", () => {
-  test("when Swag Labs login page is downloaded she should contain login logo on the top of the screen", async ({
-    page,
-  }) => {});
+  test.beforeEach(async ({ page }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    await loginPage.visitSwagLabsPage();
+  });
 
-  test("when login page is downloaded she should contain login From in the middle section", async ({
+  test("when Swag Labs login page is downloaded she should contain login logo text", async ({
     page,
-  }) => {});
+  }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    await expect(loginPage.loginLogo).toHaveText("Swag Labs");
+  });
 
-  test("when login page is downloaded login From should contain Username, Password fields & Login button", async ({
+  test("when login page is downloaded she should contain Login From in the middle section", async ({
     page,
-  }) => {});
+  }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    await expect(loginPage.loginForm).toBeVisible();
+  });
+
+  test("when login page is downloaded Login From should contain Username, Password fields & Login button", async ({
+    page,
+  }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    const loginFormBlock = [
+      loginPage.userNameFormInput,
+      loginPage.passwordFormInput,
+      loginPage.loginButton,
+    ];
+    expect(
+      loginFormBlock[0] && loginFormBlock[1] && loginFormBlock[2]
+    ).toBeVisible();
+  });
 
   test("when login page is downloaded Username field should displaying with placeholder 'Username'", async ({
     page,
-  }) => {});
+  }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    await expect(loginPage.userNamePlaceholder).toHaveText("Username");
+  });
 
   test("when login page is downloaded Password field should displaying with placeholder 'Password'", async ({
     page,
-  }) => {});
+  }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    await expect(loginPage.passwordPlaceholder()).toHaveText("Password");
+  });
 
-  test("when field with placeholder was fill with any symbol placeholder should be hidden", async ({
+  test("when field with username placeholder was fill with any symbol placeholder should be hidden", async ({
     page,
-  }) => {});
+  }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    if (!loginPage.toEqualUsernameEmptyString("")) {
+      expect(loginPage.userNamePlaceholder).toBeVisible();
+    }
+    expect(loginPage.userNamePlaceholder).toBeHidden();
+  });
+
+  test("when field with password placeholder was fill with any symbol placeholder should be hidden", async ({
+    page,
+  }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    if (!loginPage.toEqualPasswordEmptyString("")) {
+      expect(loginPage.passwordPlaceholder).toBeVisible();
+    }
+    expect(loginPage.passwordPlaceholder).toBeHidden();
+  });
 
   test("when login page is downloaded Login button should contain text 'Login'", async ({
     page,
-  }) => {});
+  }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    expect(loginPage.triggerButtonInnerText("Login"));
+  });
 
   test("when login page is downloaded she should contain credential data at the bottom", async ({
     page,
-  }) => {});
+  }) => {
+    const loginPage = new SwagLabsLoginPage(page);
+    const credentials = {
+      leftTitle: "Accepted usernames are:",
+      standardUser: "standard_user",
+      lockedUser: "locked_out_user",
+      problemUser: "problem_user",
+      performanceUser: "performance_glitch_user",
+      rightTitle: "Password for all users:",
+      passwordCredential: "secret_sauce",
+    };
+
+    expect(loginPage.pageLoginCredentials).toHaveProperty(
+      leftTitle,
+      standardUser,
+      lockedUser,
+      problemUser,
+      performanceUser
+    ) &&
+      expect(loginPage.passwordCredential).toHaveProperty(
+        rightTitle,
+        passwordCredential
+      );
+  });
 
   test("when loaded is finished credential block should composed of two parts: Accepted usernames & Password for all users", async ({
     page,
