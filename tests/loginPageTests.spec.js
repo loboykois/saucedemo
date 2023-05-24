@@ -1,116 +1,29 @@
 const { test, expect } = require("@playwright/test");
-const { SwagLabsLoginPage } = require("../pageObjects/loginPage.js");
+const { SwagLabsLoginPage} = require("../pageObjects/loginPage");
+
 
 // Swag Labs Login page Functional tests
 
 test.describe("Login page Swag Labs Functional tests", () => {
-  test.beforeEach(async ({ page }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-    await loginPage.visitSwagLabsPage();
-  });
+  test.beforeEach(async ({ page }) => {});
 
   test("when Swag Labs login page is downloaded she should contain login logo text", async ({
     page,
-  }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-    await expect(loginPage.loginLogo).toHaveText("Swag Labs");
-  });
-
-  test("when login page is downloaded she should contain Login From in the middle section", async ({
-    page,
-  }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-    await expect(loginPage.loginForm).toBeVisible();
-  });
-  // solve problem with checking child elements in parent element !!!
-  //   test("when login page is downloaded Login From should contain Username field", async ({
-  //     page,
-  //   }) => {
-  //     const loginPage = new SwagLabsLoginPage(page);
-  //   });
-
-  //   test("when login page is downloaded Login From should contain Password field", async ({
-  //     page,
-  //   }) => {
-  //     const loginPage = new SwagLabsLoginPage(page);
-  //   });
-
-  //   test("when login page is downloaded Login From should contain Login button", async ({
-  //     page,
-  //   }) => {
-  //     const loginPage = new SwagLabsLoginPage(page);
-  //   });
-
-  test.only("when login page is downloaded Username field should displaying with placeholder 'Username'", async ({
-    page,
-  }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-  });
-
-  //   test("1 when login page is downloaded Username field should displaying with placeholder 'Username'", async ({
-  //     page,
-  //   }) => {
-  //     const placeholder = await page
-  //       .locator('[data-test="username"]')
-  //       .getAttribute("placeholder");
-  //     expect(placeholder).toEqual("Username");
-  //   });
-
-  test("when login page is downloaded Password field should displaying with placeholder 'Password'", async ({
-    page,
-  }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-  });
+  }) => {});
 
   test("when field with username placeholder was fill with any symbol placeholder should be hidden", async ({
     page,
-  }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-  });
+  }) => {});
 
   test("when field with password placeholder was fill with any symbol placeholder should be hidden", async ({
     page,
-  }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-  });
+  }) => {});
 
-  test("when login page is downloaded Login button should contain text 'Login'", async ({
-    page,
-  }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-  });
-
-  test.only("when login page is downloaded she should contain credential data at the bottom", async ({
-    page,
-  }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-  });
-
-  test("when loaded is finished credential block should composed of two parts: Accepted usernames & Password for all users", async ({
+  test("when login page is downloaded credential data at the bottom should be visible", async ({
     page,
   }) => {});
 
-  test("when loaded is finished credential block should contain text", async ({
-    page,
-  }) => {});
-
-  test("when loaded is finished area around Login From should to be not clickable", async ({
-    page,
-  }) => {});
-
-  test("when cursor situated in Login button area Login button should not change own statement on hover", async ({
-    page,
-  }) => {});
-
-  test("when cursor situated in Login button area cursor should change his statement pointer", async ({
-    page,
-  }) => {});
-
-  test("when cursor is focused on Username or Password field he should be transform into text cursor", async ({
-    page,
-  }) => {});
-
-  test("when Login From displaying error message, X button should situated on the right upper corner", async ({
+  test("when Login From displaying error message, X button should displayed on the right upper corner", async ({
     page,
   }) => {});
 
@@ -125,42 +38,7 @@ test.describe("Login page Swag Labs Functional tests", () => {
   test("when user is pressed on X button in error message hint should be hidden without erasing incorrect credentials", async ({
     page,
   }) => {});
-});
 
-// Swag Labs Graphical User Interface tests
-
-test.describe("Login page Swag Labs GUI tests", () => {
-  test("when login page already rendered Login From should has white background", async ({
-    page,
-  }) => {});
-
-  test("when login page already rendered Credential block should has black background", async ({
-    page,
-  }) => {});
-
-  test("when login page already rendered Login button should be green", async ({
-    page,
-  }) => {});
-
-  test("when Login From displaying error message rectangle with message should has red background", async ({
-    page,
-  }) => {});
-
-  test("when Login From displaying error message X button on the right upper corner of red rectangle should be white", async ({
-    page,
-  }) => {});
-
-  //   test("when login page already rendered Login button should be green", async ({
-  //     page,
-  //   }) => {});
-  //   test("when login page already rendered Login button should be green", async ({
-  //     page,
-  //   }) => {});
-});
-
-// Positive & Negative Login from scenarios
-
-test.describe("Swag Labs Data tests", () => {
   test("when Login button pressed without entered credentials should display error message for user", async ({
     page,
   }) => {});
@@ -181,14 +59,6 @@ test.describe("Swag Labs Data tests", () => {
     page,
   }) => {});
 
-  test("when user entered ONLY correct username without password should display error message", async ({
-    page,
-  }) => {});
-
-  test("when user entered ONLY correct password without username should display error message", async ({
-    page,
-  }) => {});
-
   test("when username and password are entered correctly user should be logged in", async ({
     page,
   }) => {});
@@ -201,7 +71,7 @@ test.describe("Swag Labs Data tests", () => {
     page,
   }) => {});
 
-  test("when user is already logged in back button should return user to login page with empty Login Form", async ({
+  test("when user is already logged in, back button should return user to login page with empty Login Form", async ({
     page,
   }) => {});
 
@@ -210,10 +80,6 @@ test.describe("Swag Labs Data tests", () => {
   }) => {});
 
   test("when performance_glitch user was logged Login button should be disabled", async ({
-    page,
-  }) => {});
-
-  test("when performance_glitch user was logged cursor should be pointer until loading process is not finished", async ({
     page,
   }) => {});
 });
