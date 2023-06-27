@@ -11,9 +11,15 @@ export class LoginForm {
     await this.loginButton.click();
   }
 
-  async triggeredErrorText() {
-    const errorText = await this.#page.locator("[data-test='error']");
-   //  console.info("ERROR TEXT" + errorText);
+  async triggeredErrorTextBlock() {
+    const errorTextBlock = await this.#page.locator("[data-test='error']");
+    return errorTextBlock;
+  }
+
+  async getErrorText() {
+    const errorText = await this.#page
+      .locator("[data-test='error']")
+      .innerText();
     return errorText;
   }
 }
