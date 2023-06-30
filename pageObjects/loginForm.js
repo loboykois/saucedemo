@@ -11,15 +11,21 @@ export class LoginForm {
     await this.loginButton.click();
   }
 
-  async triggeredErrorTextBlock() {
-    const errorTextBlock = await this.#page.locator("[data-test='error']");
-    return errorTextBlock;
+  // async getValidationError() {
+  //   const errorElement = this.#page.locator("[data-test='error']");
+  //   return {
+  //     isVisible: await errorElement.isVisible(),
+  //     text: await errorElement.innerText()
+  //   }
+  // }
+
+  async getValidationError() {
+    return this.#page.locator("[data-test='error']");
   }
 
-  async getErrorText() {
-    const errorText = await this.#page
-      .locator("[data-test='error']")
-      .innerText();
+  async getValidationErrorText() {
+    const errorBlock = await this.getValidationError();
+    const errorText = await errorBlock.innerText();
     return errorText;
   }
 }
