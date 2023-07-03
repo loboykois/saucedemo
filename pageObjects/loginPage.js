@@ -20,6 +20,4 @@ export class SwagLabsLoginPage {
   async enterPassword(password) {
     await this.loginForm.passwordField.fill(password);
   }
-
-  
 }
