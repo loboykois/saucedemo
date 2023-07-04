@@ -19,7 +19,7 @@ test.describe("Login page Swag Labs Functional tests", () => {
     const password = await loginPage.pageLegend.getPassword();
     await loginPage.enterPassword(password);
     await loginPage.loginForm.pressLoginButton();
-    
+
     await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
   });
 
