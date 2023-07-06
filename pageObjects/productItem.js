@@ -1,41 +1,47 @@
-const productItemsMap = {
-  firstChild: "nth=0",
-  secondChild: "nth=1",
-  thirdChild: "nth=2",
-  foursChild: "nth=3",
-  fifthChild: "nth=4",
-  sixthChild: "nth=5",
-};
-
 export class ProductItem {
-  #page;
-  constructor(page) {
-    this.#page = page;
+  #productLocator;
+  constructor(productLocator) {
+    this.#productLocator = productLocator;
   }
 
-  async openDetailedProductDescription(nthChild) {
-    await this.#page
-      .locator(".inventory_list")
-      .locator(productItemsMap[nthChild])
-      .click();
+  getId() {
+    // Find right selector
+    // parse value and return number. Like from this: item_4_img_link
+  }
+  // navigationType: 'image' | 'link'
+  async openDetailedProductDescription(navigationType) {
+    // let naviSelector;
+    // if (navigationType === "image") {
+    //   naviSelector = "";
+    // } else {
+    //   naviSelector = "";
+    // }
+
+    const navigationSelector =
+      navigationType == "image"
+        ? ".inventory_item_img a"
+        : ".inventory_item_name";
+    const temp = await this.#productLocator.locator(navigationSelector).first();
+    await temp.click();
+    await this.#productLocator.page().waitForTimeout(500);
   }
 
   async getProductItemName(nthChild) {
-    const nthItem = await this.#page
+    const nthItem = await this.#productLocator
       .locator(".inventory_list")
       .locator(productItemsMap[nthChild]);
     return nthItem.locator(".inventory_item_name").innerText();
   }
 
   async getProductItemDescription(nthChild) {
-    const nthItem = await this.#page
+    const nthItem = await this.#productLocator
       .locator(".inventory_list")
       .locator(productItemsMap[nthChild]);
     return nthItem.locator(".inventory_item_desc").innerText();
   }
 
   async addTProductToBasket(nthChild) {
-    const nthItem = await this.#page
+    const nthItem = await this.#productLocator
       .locator(".inventory_list")
       .locator(productItemsMap[nthChild]);
     await nthItem
@@ -44,7 +50,7 @@ export class ProductItem {
   }
 
   async removeProductFromBasket(nthChild) {
-    const nthItem = await this.#page
+    const nthItem = await this.#productLocator
       .locator(".inventory_list")
       .locator(productItemsMap[nthChild]);
     await await nthItem

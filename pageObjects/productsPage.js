@@ -5,15 +5,14 @@ export class Products {
 
   constructor(page) {
     this.#page = page;
-
-    this.productItem = new ProductItem(page);
   }
 
-  async getProductsItemsCollection() {
+  async getProductsItems() {
     await this.#page.waitForTimeout(500);
-    const productsItemsList = this.#page.locator(
+    const productsItemsList = await this.#page.locator(
       ".inventory_list > .inventory_item"
-    );
-    return productsItemsList;
+    ).all()
+  
+    return productsItemsList.map(i => new ProductItem(i));
   }
 }
