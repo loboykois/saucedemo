@@ -7,7 +7,6 @@ export class BasePage {
     this.#page = page;
 
     this.navigationBar = new NavigationBar(page);
-    
     this.pageFooter = new PageFooter(page);
   }
 

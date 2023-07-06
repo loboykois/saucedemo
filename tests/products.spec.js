@@ -1,8 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage";
-import { Inventory } from "../pageObjects/inventoryItems";
+import { Products } from "../pageObjects/productsItems";
 
-test.describe("Inventory items test suit", () => {
+test.describe("Products items test suit", () => {
+  // Visit login page before each test cases / why not working with this fixture ?
+  //  test.beforeEach(async ({ page }) => {
+  //    const loginPage = new SwagLabsLoginPage(page);
+  //    await loginPage.visitLoginPage();
+  //  });
+
   test("when inventory page is loaded should be displayed 6 products items", async ({
     page,
   }) => {
@@ -21,14 +27,9 @@ test.describe("Inventory items test suit", () => {
 
     // Act:
     // count amount of products items on inventory page
-    const inventoryArea = new Inventory(page);
-    const itemsAmount = await inventoryArea.getProductsItemsCollection();
-
-    await expect(itemsAmount).toHaveCount(6);
-  });
-
-  test('test', async ({ page }) => {
-   await page.goto('http://autopract.com/selenium/parents.html');
-   await expect(page.locator('.menu li')).toHaveCount(4)
+    const inventoryArea = new Products(page);
+    const productsItemsCollection =
+      await inventoryArea.getProductsItemsCollection();
+    await expect(productsItemsCollection).toHaveCount(6);
   });
 });
