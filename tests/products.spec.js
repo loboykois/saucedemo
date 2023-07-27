@@ -3,7 +3,6 @@ import { SwagLabsLoginPage } from "../pageObjects/loginPage";
 import { Products } from "../pageObjects/productsPage";
 
 test.describe("Products items test suit", () => {
-  // Visit login page before each test cases / why not working with this fixture ?
   test.beforeEach(async ({ page }) => {
     const loginPage = new SwagLabsLoginPage(page);
     await loginPage.visitLoginPage();
@@ -18,8 +17,6 @@ test.describe("Products items test suit", () => {
   test("when inventory page is loaded should be displayed 6 products items", async ({
     page,
   }) => {
-    // Act:
-    // count amount of products items on inventory page
     const inventoryArea = new Products(page);
     const productItems = await inventoryArea.getProductsItems();
 
@@ -27,8 +24,6 @@ test.describe("Products items test suit", () => {
   });
 
   test("should navigate to details", async ({ page }) => {
-    // Act:
-    // count amount of products items on inventory page
     const inventoryArea = new Products(page);
     const productItems = await inventoryArea.getProductsItems();
 
@@ -37,7 +32,31 @@ test.describe("Products items test suit", () => {
       "https://www.saucedemo.com/inventory-item.html?id=4"
     );
   });
+
+  test("should have valid content for the first item", async ({ page }) => {
+    const inventoryArea = new Products(page);
+    const targetItem = await inventoryArea.getProductItem(0);
+
+    const expectedDescription =
+      "carry.allTheThings() with the sleek, streamlined " +
+      "Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.";
+
+    expect(await targetItem.getTitle()).toBe("Sauce Labs Backpack");
+    expect(await targetItem.getDescription()).toBe(expectedDescription);
+  });
+
+  test("should have valid price for the first item", async ({ page }) => {
+    const inventoryArea = new Products(page);
+    const targetItem = await inventoryArea.getProductItem(0);
+    const itemPrice = await targetItem.getPrice();
+
+    expect(`${itemPrice.currency}${itemPrice.value}`).toBe("$29.99");
+  });
 });
 
-// Focus on:
-// Last test to be data driven. Implement getId for productItem
+// implement page object for product details page
+// check back to products button - click and check you changed the page
+// reuse product item inside product details. And repeat test cases like we did on product list
+// you can make a separate spec file to check product details page only
+
+/// after that - start looking into filter component page object. like `filterSelector` page object

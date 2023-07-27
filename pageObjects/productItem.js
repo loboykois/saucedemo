@@ -4,19 +4,8 @@ export class ProductItem {
     this.#productLocator = productLocator;
   }
 
-  getId() {
-    // Find right selector
-    // parse value and return number. Like from this: item_4_img_link
-  }
   // navigationType: 'image' | 'link'
   async openDetailedProductDescription(navigationType) {
-    // let naviSelector;
-    // if (navigationType === "image") {
-    //   naviSelector = "";
-    // } else {
-    //   naviSelector = "";
-    // }
-
     const navigationSelector =
       navigationType == "image"
         ? ".inventory_item_img a"
@@ -26,35 +15,32 @@ export class ProductItem {
     await this.#productLocator.page().waitForTimeout(500);
   }
 
-  async getProductItemName(nthChild) {
-    const nthItem = await this.#productLocator
-      .locator(".inventory_list")
-      .locator(productItemsMap[nthChild]);
-    return nthItem.locator(".inventory_item_name").innerText();
+  async getTitle() {
+    const productTitle = await this.#productLocator
+      .locator(".inventory_item_name")
+      .innerText();
+
+    return productTitle;
   }
 
-  async getProductItemDescription(nthChild) {
-    const nthItem = await this.#productLocator
-      .locator(".inventory_list")
-      .locator(productItemsMap[nthChild]);
-    return nthItem.locator(".inventory_item_desc").innerText();
+  async getDescription() {
+    const productDescription = await this.#productLocator
+      .locator(".inventory_item_desc")
+      .innerText();
+
+    return productDescription;
   }
 
-  async addTProductToBasket(nthChild) {
-    const nthItem = await this.#productLocator
-      .locator(".inventory_list")
-      .locator(productItemsMap[nthChild]);
-    await nthItem
-      .locator("[data-test='add-to-cart-sauce-labs-backpack']")
-      .click();
-  }
+  async getPrice() {
+    const priceBar = await this.#productLocator
+      .locator(".inventory_item_price")
+      .innerText();
 
-  async removeProductFromBasket(nthChild) {
-    const nthItem = await this.#productLocator
-      .locator(".inventory_list")
-      .locator(productItemsMap[nthChild]);
-    await await nthItem
-      .locator("[data-test='remove-sauce-labs-backpack']")
-      .click();
+    //  const resultItems = splitContent.slice(1, splitContent.length - 1);
+
+    return {
+      currency: priceBar[0],
+      value: Number(priceBar.slice(1, priceBar.length)),
+    };
   }
 }
