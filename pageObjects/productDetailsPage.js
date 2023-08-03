@@ -4,23 +4,17 @@
 // you can make a separate spec file to check product details page only
 
 /// after that - start looking into filter component page object. like `filterSelector` page object
-import { Products } from "../pageObjects/productsPage";
+import { ProductItem, locatedOn } from "./productItem";
 
-export class ProductDetails {
+export class ProductDetailsPage {
   #page;
 
   constructor(page) {
     this.#page = page;
-    this.products = new Products(page);
+    this.productItem = new ProductItem(page, locatedOn.details);
   }
 
   async backToProducts() {
     await this.#page.locator("[data-test='back-to-products']").click();
-  }
-
-  async getDetails(index) {
-    const targetItem = await this.products.getProductItem(index);
-    await targetItem.openDetailedProductDescription();
-    return targetItem.getDetailsDescription();
   }
 }

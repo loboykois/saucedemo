@@ -1,4 +1,4 @@
-import { ProductItem } from "./productItem";
+import { ProductItem, locatedOn } from "./productItem";
 
 export class Products {
   #page;
@@ -13,7 +13,7 @@ export class Products {
       .locator(".inventory_list > .inventory_item")
       .all();
 
-    return productsItemsList.map((i) => new ProductItem(i));
+    return productsItemsList.map((i) => new ProductItem(i, locatedOn.item));
   }
 
   async getProductItem(index) {
@@ -22,6 +22,6 @@ export class Products {
       .locator(".inventory_list > .inventory_item")
       .nth(index);
 
-      return new ProductItem(foundItem);
+    return new ProductItem(foundItem, locatedOn.item);
   }
 }

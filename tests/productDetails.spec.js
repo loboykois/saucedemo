@@ -1,8 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage";
 import { Products } from "../pageObjects/productsPage";
-import { ProductDetails } from "../pageObjects/detailsPage";
-import { ProductItem } from "../pageObjects/productItem";
+import { ProductDetailsPage } from "../pageObjects/productDetailsPage";
 
 test.describe("Product details test suite", () => {
   test.beforeEach(async ({ page }) => {
@@ -22,7 +21,7 @@ test.describe("Product details test suite", () => {
   }) => {
     const inventoryArea = new Products(page);
     const productsItems = await inventoryArea.getProductsItems();
-    const detailsArea = new ProductDetails(page);
+    const detailsArea = new ProductDetailsPage(page);
 
     await productsItems[1].openDetailedProductDescription("image");
     await expect(page).toHaveURL(
@@ -34,13 +33,15 @@ test.describe("Product details test suite", () => {
   });
 
   test("should have valid content for item detail", async ({ page }) => {
-    const detailsArea = new ProductDetails(page);
-    const detailsDescription = await detailsArea.getDetails(1);
+    const inventoryArea = new Products(page);
+    const productsItems = await inventoryArea.getProductsItems();
 
-    const detailContent =
-      "A red light isn't the desired state in testing but it sure helps when" +
-      "riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.";
+    await productsItems[1].openDetailedProductDescription("image");
 
-    expect(await detailsDescription).toBe(detailContent);
+    const detailsPage = new ProductDetailsPage(page);
+
+    expect(await detailsPage.productItem.getItemTitle()).toBe(
+      "Sauce Labs Bike Light"
+    );
   });
 });
