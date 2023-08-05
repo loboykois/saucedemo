@@ -44,8 +44,6 @@ export class ProductItem {
       .locator(`.inventory_${this.#locatedOn}_price`)
       .innerText();
 
-    //  const resultItems = splitContent.slice(1, splitContent.length - 1);
-
     return {
       currency: priceBar[0],
       value: Number(priceBar.slice(1, priceBar.length)),
