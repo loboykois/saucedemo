@@ -12,7 +12,6 @@ export class ProductItem {
     this.#locatedOn = locatedOn;
   }
 
-  // navigationType: 'image' | 'link'
   async openDetailedProductDescription(navigationType) {
     const navigationSelector =
       navigationType == "image"

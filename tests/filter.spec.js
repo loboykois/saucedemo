@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { Filter } from "../pageObjects/filter";
+import { Filter, optionType } from "../pageObjects/filter";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage";
 
 test.describe("Filter dropdown test suite", () => {
@@ -45,5 +45,9 @@ test.describe("Filter dropdown test suite", () => {
 
   test("when Name (A to Z) options is chosen filter should sort product items in alphabet order", async ({
     page,
-  }) => {});
+  }) => {
+    const filter = new Filter(page);
+
+    await filter.sortItemsFromAtoZ();
+  });
 });

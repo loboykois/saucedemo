@@ -1,3 +1,6 @@
+import { locatedOn } from "./productItem";
+import { Products } from "./productsPage";
+
 export const optionType = {
   az: "Name (A to Z)",
   za: "Name (Z to A)",
@@ -10,15 +13,10 @@ export class Filter {
 
   constructor(page) {
     this.#page = page;
+    this.products = new Products(page, locatedOn.item);
   }
 
   async getListOfOptions() {
-    //  const optionsList = await this.#page.$$eval(
-    //    "[data-test='product_sort_container'] > option",
-    //    (element) => element.map((option) => option.textContent)
-    //  );
-    //  return optionsList;
-
     await this.#page.waitForTimeout(500);
 
     const optionsList = await this.#page
@@ -28,19 +26,10 @@ export class Filter {
     return optionsList.map((option) => option);
   }
 
-  async selectOptionByType(optionType) {
-    return await this.#page
-      .locator("[data-test='product_sort_container']")
-      .selectOption(optionType);
-  }
+  async sortItemsFromAtoZ() {
+    const items = await this.products.getProductsItems();
+    const titles = await items.textContent();
 
-  async selectOptionByIndex(order) {
-    return await this.#page
-      .locator("[data-test='product_sort_container']")
-      .selectOption({ index: order });
-  }
-
-  async selectOption() {
-    return await this.#page.locator(".active_option").innerText();
+    return titles;
   }
 }
