@@ -1,9 +1,13 @@
 import { test, expect } from "@playwright/test";
 import { Filter, optionType } from "../pageObjects/filter";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage";
-import { ProductItem } from "../pageObjects/productItem";
 import { Products } from "../pageObjects/productsPage";
-import { byAlphabetDescending } from "./tools/sorting";
+import {
+  byAlphabetAscending,
+  byAlphabetDescending,
+  byPriceAscending,
+  byPriceDescending,
+} from "./tools/sorting";
 
 test.describe("Filter dropdown test suite", () => {
   test.beforeEach(async ({ page }) => {
@@ -22,9 +26,12 @@ test.describe("Filter dropdown test suite", () => {
     page,
   }) => {
     const filter = new Filter(page);
-    const activeOption = filter.selectOption();
+    const activeOption = await filter.selectDefaultOption();
 
-    expect(await activeOption).toBe("Name (A to Z)");
+    expect(activeOption).toBe("Name (A to Z)");
+
+    //  expect(await activeOption).toBe("Name (A to Z)");
+    //  const activeOption = await page.locator(".active_option").innerText();
   });
 
   test("filter should contain four slots in option list", async ({ page }) => {
@@ -47,6 +54,19 @@ test.describe("Filter dropdown test suite", () => {
     expect(await productItem.getItemTitle()).toBe(
       "Test.allTheThings() T-Shirt (Red)"
     );
+  });
+
+  test("when Name (A to Z) options is chosen filter should set correct first product item", async ({
+    page,
+  }) => {
+    const filter = new Filter(page);
+
+    await filter.selectOption(optionType.ascending);
+
+    const products = new Products(page);
+    const productItem = await products.getProductItem(0);
+
+    expect(await productItem.getItemTitle()).toBe("Sauce Labs Backpack");
   });
 
   test("when Name (Z to A) options is chosen filter should sort product items in alphabet descending order", async ({
@@ -78,5 +98,69 @@ test.describe("Filter dropdown test suite", () => {
       "Sauce Labs Backpack",
     ];
     expect(ordered).toEqual(expected);
+  });
+
+  test("when Name (A to Z) options is chosen filter should sort product items in alphabet ascending order", async ({
+    page,
+  }) => {
+    const filter = new Filter(page);
+
+    await filter.selectOption(optionType.ascending);
+
+    const products = new Products(page);
+    const productItems = await products.getProductsItems();
+
+    const titles = await Promise.all(productItems.map((t) => t.getItemTitle()));
+
+    const ordered = titles.sort(byAlphabetAscending);
+    const expected = [
+      "Test.allTheThings() T-Shirt (Red)",
+      "Sauce Labs Onesie",
+      "Sauce Labs Fleece Jacket",
+      "Sauce Labs Bolt T-Shirt",
+      "Sauce Labs Bike Light",
+      "Sauce Labs Backpack",
+    ];
+    expect(ordered).toEqual(expected.reverse());
+  });
+
+  test("when Price (low to high) options is chosen filter should sort product items by price from lowest to highest", async ({
+    page,
+  }) => {
+    const filter = new Filter(page);
+
+    await filter.selectOption(optionType.lowPrice);
+
+    const products = new Products(page);
+    const productItems = await products.getProductsItems();
+
+    const prices = await Promise.all(productItems.map((p) => p.getItemPrice()));
+
+    const priceValues = await Promise.all(prices.map((v) => v["value"]));
+
+    const ordered = priceValues.sort(byPriceAscending);
+
+    const expected = [7.99, 9.99, 15.99, 15.99, 29.99, 49.99];
+
+    expect(ordered).toEqual(expected);
+  });
+
+  test("when Price (high to low) options is chosen filter should sort product items by price from highest to lowest", async ({
+    page,
+  }) => {
+    const filter = new Filter(page);
+
+    await filter.selectOption(optionType.lowPrice);
+
+    const products = new Products(page);
+    const productItems = await products.getProductsItems();
+
+    const prices = await Promise.all(productItems.map((p) => p.getItemPrice()));
+    const priceValues = await Promise.all(prices.map((v) => v["value"]));
+
+    const ordered = priceValues.sort(byPriceDescending);
+    const expected = [7.99, 9.99, 15.99, 15.99, 29.99, 49.99];
+
+    expect(ordered).toEqual(expected.reverse());
   });
 });

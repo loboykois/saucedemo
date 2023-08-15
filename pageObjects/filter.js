@@ -31,4 +31,12 @@ export class Filter {
       .locator("[data-test='product_sort_container']")
       .selectOption(optionType);
   }
+
+  async selectDefaultOption() {
+    return await this.#page.locator(".active_option").innerText();
+    
+   //  const option = await this.#page.locator(".active_option");
+   //  const optionText = await option.innerText();
+   //  return optionText;
+  }
 }
