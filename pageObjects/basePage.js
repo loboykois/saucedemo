@@ -1,5 +1,6 @@
 import { PageFooter } from "./footer";
 import { NavigationBar } from "./navigationBar";
+import { ShoppingCart } from "./shoppingCart";
 
 export class BasePage {
   #page;
@@ -8,6 +9,7 @@ export class BasePage {
 
     this.navigationBar = new NavigationBar(page);
     this.pageFooter = new PageFooter(page);
+    this.shoppingCart = new ShoppingCart(page);
   }
 
   async openNavigationBar() {
@@ -24,5 +26,9 @@ export class BasePage {
 
   async expectedPageTitle() {
     this.#page.locator(".title");
+  }
+
+  async openCartPage() {
+    await this.#page.locator(".shopping_cart_link").click();
   }
 }

@@ -48,4 +48,16 @@ export class ProductItem {
       value: Number(priceBar.slice(1, priceBar.length)),
     };
   }
+
+  async addItemToCart() {
+    await this.#productLocator
+      .locator("[data-test='add-to-cart-sauce-labs-backpack']")
+      .click();
+  }
+
+  async removeItemFromCart() {
+    await this.#productLocator
+      .locator("[data-test='remove-sauce-labs-backpack']")
+      .click();
+  }
 }
