@@ -6,7 +6,7 @@ export class ShoppingCart {
   }
 
   async getShoppingCart() {
-    this.#page.locator(".shopping_cart_link");
+    return await this.#page.locator(".shopping_cart_link");
   }
 
   async getShoppingCartCounter() {

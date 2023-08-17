@@ -19,12 +19,10 @@ test.describe("Shopping Cart test suit", () => {
   test("if user has not added items to cart Shopping Cart should be empty", async ({
     page,
   }) => {
-    // create way to check empty shopping cart link or not
-
     const cart = new ShoppingCart(page);
     const shoppingCart = await cart.getShoppingCart();
 
-    expect(shoppingCart).toBeEmpty();
+    await expect(shoppingCart).toBeEmpty();
   });
 
   test("when user clicked on Add to Cart button Shopping Cart counter should be equal 1", async ({
