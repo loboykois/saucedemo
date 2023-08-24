@@ -1,5 +1,5 @@
 import { locatedOn } from "./productItem";
-import { Products } from "./productsPage";
+import { ProductsPage } from "./productsPage";
 
 export const optionType = {
   ascending: "az",
@@ -13,7 +13,7 @@ export class Filter {
 
   constructor(page) {
     this.#page = page;
-    this.products = new Products(page, locatedOn.item);
+    this.products = new ProductsPage(page, locatedOn.item);
   }
 
   async getListOfOptions() {
@@ -32,11 +32,7 @@ export class Filter {
       .selectOption(optionType);
   }
 
-  async selectDefaultOption() {
+  async getSelectedItemText() {
     return await this.#page.locator(".active_option").innerText();
-    
-   //  const option = await this.#page.locator(".active_option");
-   //  const optionText = await option.innerText();
-   //  return optionText;
   }
 }

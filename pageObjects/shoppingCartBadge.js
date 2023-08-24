@@ -1,4 +1,4 @@
-export class ShoppingCart {
+export class ShoppingCartBadge {
   #page;
 
   constructor(page) {
@@ -9,7 +9,9 @@ export class ShoppingCart {
     return await this.#page.locator(".shopping_cart_link");
   }
 
-  async getShoppingCartCounter() {
-    return Number(await this.#page.locator(".shopping_cart_badge").innerText());
+  async getCounter() {
+    return Number(await this.#page.locator(".shopping_cart_link").innerText());
   }
 }
+
+// add to base page

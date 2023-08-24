@@ -1,6 +1,6 @@
 import { PageFooter } from "./footer";
 import { NavigationBar } from "./navigationBar";
-import { ShoppingCart } from "./shoppingCart";
+import { ShoppingCartBadge } from "./shoppingCartBadge";
 
 export class BasePage {
   #page;
@@ -9,7 +9,7 @@ export class BasePage {
 
     this.navigationBar = new NavigationBar(page);
     this.pageFooter = new PageFooter(page);
-    this.shoppingCart = new ShoppingCart(page);
+    this.shoppingCartBadge = new ShoppingCartBadge(page);
   }
 
   async openNavigationBar() {

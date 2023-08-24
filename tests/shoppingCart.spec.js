@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage";
-import { Products } from "../pageObjects/productsPage";
-import { ShoppingCart } from "../pageObjects/shoppingCart";
+import { ProductsPage } from "../pageObjects/productsPage";
+import { ShoppingCartBadge } from "../pageObjects/shoppingCartBadge";
+import { BasePage } from "../pageObjects/basePage";
 
 test.describe("Shopping Cart test suit", () => {
   test.beforeEach(async ({ page }) => {
@@ -19,23 +20,24 @@ test.describe("Shopping Cart test suit", () => {
   test("if user has not added items to cart Shopping Cart should be empty", async ({
     page,
   }) => {
-    const cart = new ShoppingCart(page);
+    const cart = new ShoppingCartBadge(page);
     const shoppingCart = await cart.getShoppingCart();
 
     await expect(shoppingCart).toBeEmpty();
   });
 
-  test("when user clicked on Add to Cart button Shopping Cart counter should be equal 1", async ({
+  // when user added item to card badge should increase counter by 1
+  test("when user clicked on Add to Cart button Shopping Cart counter should 1", async ({
     page,
   }) => {
-    const inventoryArea = new Products(page);
-    const productItem = inventoryArea.getProductItem(0);
+    const productsPage = new ProductsPage(page);
+    const productItem = await productsPage.getProductItem(0);
 
-    (await productItem).addItemToCart();
+    const beforeAddCount = await productsPage.shoppingCartBadge.getCounter();
+    await productItem.addItemToCart();
+    const afterAddCount = await productsPage.shoppingCartBadge.getCounter();
 
-    const cart = new ShoppingCart(page);
-    const cartCounter = cart.getShoppingCartCounter();
-
-    expect(await cartCounter).toBe(1);
+    expect(beforeAddCount).toBe(0);
+    expect(afterAddCount).toBe(1);
   });
 });

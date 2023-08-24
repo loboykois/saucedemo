@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage";
-import { Products } from "../pageObjects/productsPage";
+import { ProductsPage } from "../pageObjects/productsPage";
 
 test.describe("Products items test suit", () => {
   test.beforeEach(async ({ page }) => {
@@ -17,14 +17,14 @@ test.describe("Products items test suit", () => {
   test("when inventory page is loaded should be displayed 6 products items", async ({
     page,
   }) => {
-    const inventoryArea = new Products(page);
+    const inventoryArea = new ProductsPage(page);
     const productItems = await inventoryArea.getProductsItems();
 
     expect(productItems.length).toBe(6);
   });
 
   test("should navigate to details", async ({ page }) => {
-    const inventoryArea = new Products(page);
+    const inventoryArea = new ProductsPage(page);
     const productItems = await inventoryArea.getProductsItems();
 
     await productItems[0].openDetailedProductDescription("image");
@@ -34,7 +34,7 @@ test.describe("Products items test suit", () => {
   });
 
   test("should have valid content for the first item", async ({ page }) => {
-    const inventoryArea = new Products(page);
+    const inventoryArea = new ProductsPage(page);
     const targetItem = await inventoryArea.getProductItem(0);
 
     const expectedDescription =
@@ -46,7 +46,7 @@ test.describe("Products items test suit", () => {
   });
 
   test("should have valid price for the first item", async ({ page }) => {
-    const inventoryArea = new Products(page);
+    const inventoryArea = new ProductsPage(page);
     const targetItem = await inventoryArea.getProductItem(0);
     const itemPrice = await targetItem.getItemPrice();
 
