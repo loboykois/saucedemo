@@ -1,8 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { SwagLabsLoginPage } from "../pageObjects/loginPage";
-import { ProductsPage } from "../pageObjects/productsPage";
-import { ShoppingCartBadge } from "../pageObjects/shoppingCartBadge";
-import { BasePage } from "../pageObjects/basePage";
+import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
+import { ProductsPage } from "../pageObjects/productsPage/products/productsPage";
+import { ShoppingCartBadge } from "../pageObjects/productsPage/shoppingCartBadge";
 
 test.describe("Shopping Cart test suit", () => {
   test.beforeEach(async ({ page }) => {

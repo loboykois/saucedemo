@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { SwagLabsLoginPage } from "../pageObjects/loginPage";
-import { Products } from "../pageObjects/productsPage";
-import { ProductDetailsPage } from "../pageObjects/productDetailsPage";
+import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
+import { ProductsPage } from "../pageObjects/productsPage/products/productsPage";
+import { ProductDetailsPage } from "../pageObjects/productsPage/productsDetails/productDetailsPage";
 
 test.describe("Product details test suite", () => {
   test.beforeEach(async ({ page }) => {
@@ -19,7 +19,7 @@ test.describe("Product details test suite", () => {
   test("when user pressed Back to products button he should back on Products page", async ({
     page,
   }) => {
-    const inventoryArea = new Products(page);
+    const inventoryArea = new ProductsPage(page);
     const productsItems = await inventoryArea.getProductsItems();
     const detailsArea = new ProductDetailsPage(page);
 
@@ -33,7 +33,7 @@ test.describe("Product details test suite", () => {
   });
 
   test("should have valid content for item detail", async ({ page }) => {
-    const inventoryArea = new Products(page);
+    const inventoryArea = new ProductsPage(page);
     const productsItems = await inventoryArea.getProductsItems();
 
     await productsItems[1].openDetailedProductDescription("image");

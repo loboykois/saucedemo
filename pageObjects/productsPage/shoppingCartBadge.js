@@ -13,5 +13,3 @@ export class ShoppingCartBadge {
     return Number(await this.#page.locator(".shopping_cart_link").innerText());
   }
 }
-
-// add to base page

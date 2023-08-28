@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { BasePage } from "../pageObjects/basePage";
-import { SwagLabsLoginPage } from "../pageObjects/loginPage";
-import { navigationLinksMap } from "../pageObjects/navigationBar";
+import { BasePage } from "../pageObjects/basePage/basePage";
+import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
+import { navigationLinksMap } from "../pageObjects/basePage/navigationBar";
 
 test.describe("Navigation bar test suite", () => {
   test.beforeEach(async ({ page }) => {

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { SwagLabsLoginPage } from "../pageObjects/loginPage";
+import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
 
 // Swag Labs Login page Functional tests
 

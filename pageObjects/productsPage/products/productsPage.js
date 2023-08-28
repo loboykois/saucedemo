@@ -1,6 +1,6 @@
-import { BasePage } from "./basePage";
+import { BasePage } from "../../basePage/basePage";
 import { ProductItem, locatedOn } from "./productItem";
-import { ShoppingCartBadge } from "./shoppingCartBadge";
+import { ShoppingCartBadge } from "../shoppingCartBadge";
 
 export class ProductsPage extends BasePage {
   #page;

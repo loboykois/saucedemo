@@ -1,5 +1,5 @@
-import { LoginForm } from "./loginForm.js";
-import { LoginPageLegend } from "./pageLegend.js";
+import { LoginForm } from "./form/loginForm.js";
+import { LoginPageLegend } from "./legend/pageLegend.js";
 
 export class SwagLabsLoginPage {
   #page;

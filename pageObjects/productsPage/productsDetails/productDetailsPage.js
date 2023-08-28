@@ -1,4 +1,4 @@
-import { ProductItem, locatedOn } from "./productItem";
+import { ProductItem, locatedOn } from "../products/productItem";
 
 export class ProductDetailsPage {
   #page;

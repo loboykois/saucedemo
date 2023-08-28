@@ -1,6 +1,6 @@
 import { PageFooter } from "./footer";
 import { NavigationBar } from "./navigationBar";
-import { ShoppingCartBadge } from "./shoppingCartBadge";
+import { ShoppingCartBadge } from "../productsPage/shoppingCartBadge";
 
 export class BasePage {
   #page;
