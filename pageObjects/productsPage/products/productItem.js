@@ -3,13 +3,20 @@ export const locatedOn = {
   details: "details",
 };
 
+export const listType = {
+  inventory: "inventory",
+  cart: "cart",
+};
+
 export class ProductItem {
   #productLocator;
   #locatedOn;
+  #listType;
 
-  constructor(productLocator, locatedOn) {
+  constructor(productLocator, locatedOn, listType) {
     this.#productLocator = productLocator;
     this.#locatedOn = locatedOn;
+    this.#listType = listType;
   }
 
   async openDetailedProductDescription(navigationType) {
@@ -24,7 +31,7 @@ export class ProductItem {
 
   async getItemTitle() {
     const productTitle = await this.#productLocator
-      .locator(`.inventory_${this.#locatedOn}_name`)
+      .locator(`.${this.#listType}_${this.#locatedOn}_name`)
       .innerText();
 
     return productTitle;
@@ -32,7 +39,7 @@ export class ProductItem {
 
   async getItemDescription() {
     const productDescription = await this.#productLocator
-      .locator(`.inventory_${this.#locatedOn}_desc`)
+      .locator(`.${this.#listType}_${this.#locatedOn}_desc`)
       .innerText();
 
     return productDescription;
@@ -40,7 +47,7 @@ export class ProductItem {
 
   async getItemPrice() {
     const priceBar = await this.#productLocator
-      .locator(`.inventory_${this.#locatedOn}_price`)
+      .locator(`.${this.#listType}_${this.#locatedOn}_price`)
       .innerText();
 
     return {

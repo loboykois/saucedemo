@@ -1,5 +1,5 @@
 import { BasePage } from "../../basePage/basePage";
-import { ProductItem, locatedOn } from "./productItem";
+import { ProductItem, listType, locatedOn } from "./productItem";
 import { ShoppingCartBadge } from "../shoppingCartBadge";
 
 export class ProductsPage extends BasePage {
@@ -17,7 +17,7 @@ export class ProductsPage extends BasePage {
       .locator(".inventory_list > .inventory_item")
       .all();
 
-    return productsItemsList.map((i) => new ProductItem(i, locatedOn.item));
+    return productsItemsList.map((i) => new ProductItem(i, locatedOn.item, listType.inventory));
   }
 
   async getProductItem(index) {
@@ -26,6 +26,6 @@ export class ProductsPage extends BasePage {
       .locator(".inventory_list > .inventory_item")
       .nth(index);
 
-    return new ProductItem(foundItem, locatedOn.item);
+    return new ProductItem(foundItem, locatedOn.item, listType.inventory);
   }
 }

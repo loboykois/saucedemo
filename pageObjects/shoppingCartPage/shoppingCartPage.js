@@ -1,38 +1,30 @@
+import {
+  ProductItem,
+  listType,
+  locatedOn,
+} from "../productsPage/products/productItem";
+
 export class ShoppingCartPage {
   constructor(page) {
     this.#page = page;
+    this.productItem = new ProductItem(page, locatedOn.item, listType.cart);
   }
 
-  async getItems() {
-    await this.#page.waitForTimeout(500);
-    const productsItemsList = await this.#page
-      .locator(".cart_list > .cart_item")
-      .all();
-
-    return productsItemsList.map((i) => new CartItem(i, locatedOn.item));
+  async getGuantity() {
+    return Number(await this.#page.locator(".cart_quantity").innerText());
   }
 
-  async getItem(index) {
-    await this.#page.waitForTimeout(500);
-    const foundItem = await this.#page
-      .locator(".cart_list > .cart_item")
-      .nth(index);
-
-    return new CartItem(foundItem);
-  }
-}
-
-export class CartItem {
-  constructor(page) {
-    this.details = new ProductItem(page);
+  async removeFromCart() {
+    await this.#page
+      .locator("[data-test='remove-sauce-labs-backpack']")
+      .click();
   }
 
-  getQuantity() {
-    return Number(locator.getInnerText());
+  async backToProducts() {
+    await this.#page.locator("[data-test='continue-shopping']").click();
+  }
+
+  async checkOut() {
+    await this.#page.locator("[data-test='checkout']").click();
   }
 }
-
-const cart = new ShoppingCartPage(page);
-const firstItem = await cart.getItem(0);
-expect(await firstItem.getQuantity()).toBe(1);
-const itemTitle = await firstItem.itemDetails.getItemTitle();

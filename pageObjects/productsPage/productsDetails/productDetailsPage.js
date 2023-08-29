@@ -1,11 +1,15 @@
-import { ProductItem, locatedOn } from "../products/productItem";
+import { ProductItem, listType, locatedOn } from "../products/productItem";
 
 export class ProductDetailsPage {
   #page;
 
   constructor(page) {
     this.#page = page;
-    this.productItem = new ProductItem(page, locatedOn.details);
+    this.productItem = new ProductItem(
+      page,
+      locatedOn.details,
+      listType.inventory
+    );
   }
 
   async backToProducts() {

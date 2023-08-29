@@ -20,10 +20,6 @@ export class BasePage {
     this.#page.locator(".app_logo").innerText();
   }
 
-  async openBasket() {
-    await this.#page.locator(".shopping_cart_link").click();
-  }
-
   async expectedPageTitle() {
     this.#page.locator(".title");
   }
@@ -31,4 +27,8 @@ export class BasePage {
   async openCartPage() {
     await this.#page.locator(".shopping_cart_link").click();
   }
+
+  //   async openBasket() {
+  //     await this.#page.locator(".shopping_cart_link").click();
+  //   }
 }
