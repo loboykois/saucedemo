@@ -58,13 +58,11 @@ export class ProductItem {
 
   async addItemToCart() {
     await this.#productLocator
-      .locator("[data-test='add-to-cart-sauce-labs-backpack']")
+      .locator("button:has-text('Add to cart')")
       .click();
   }
 
   async removeItemFromCart() {
-    await this.#productLocator
-      .locator("[data-test='remove-sauce-labs-backpack']")
-      .click();
+    await this.#productLocator.locator("button:has-text('Remove')").click();
   }
 }

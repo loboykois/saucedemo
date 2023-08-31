@@ -27,8 +27,4 @@ export class BasePage {
   async openCartPage() {
     await this.#page.locator(".shopping_cart_link").click();
   }
-
-  //   async openBasket() {
-  //     await this.#page.locator(".shopping_cart_link").click();
-  //   }
 }
