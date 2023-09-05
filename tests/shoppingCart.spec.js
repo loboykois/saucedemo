@@ -18,10 +18,11 @@ test.describe("Shopping cart test suit", () => {
   test("When user press cart badge he should navigated on Cart page", async ({
     page,
   }) => {
-    const swagPage = new BasePage(page);
-    await swagPage.openCartPage();
+    const basePage = new BasePage(page);
 
-    await expect(swagPage).toHaveURL("https://www.saucedemo.com/cart.html");
+    await basePage.openCartPage();
+
+    await expect(page).toHaveURL("https://www.saucedemo.com/cart.html");
   });
 
   test("If no added products items to cart cart list should be empty", async ({
@@ -36,9 +37,6 @@ test.describe("Shopping cart test suit", () => {
     expect(cartItems.length).toBe(0);
   });
 
-
-
-//   TODO: fix this test case
   test("All added products should be display on Cart page", async ({
     page,
   }) => {

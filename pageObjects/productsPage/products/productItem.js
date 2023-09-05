@@ -1,6 +1,8 @@
 export const locatedOn = {
   item: "item",
   details: "details",
+  cart: "cart",
+  inventory: "inventory",
 };
 
 export const listType = {

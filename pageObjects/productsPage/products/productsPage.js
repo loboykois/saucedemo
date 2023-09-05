@@ -16,7 +16,7 @@ export class ProductsPage extends BasePage {
   async getProductsItems() {
     await this.#page.waitForTimeout(500);
     const productsItemsList = await this.#page
-      .locator(`.${listType.inventory}_list > .inventory_item`)
+      .locator(`.${listType.inventory}_list > .${locatedOn.inventory}_item`)
       .all();
 
     return productsItemsList.map(
@@ -27,7 +27,7 @@ export class ProductsPage extends BasePage {
   async getProductItem(index) {
     await this.#page.waitForTimeout(500);
     const foundItem = await this.#page
-      .locator(`.${listType.inventory}_list > .inventory_item`)
+      .locator(`.${listType.inventory}_list > .${locatedOn.inventory}_item`)
       .nth(index);
 
     return new ProductItem(foundItem, locatedOn.item, listType.inventory);
@@ -38,7 +38,7 @@ export class ProductsPage extends BasePage {
   async getCartItems() {
     await this.#page.waitForTimeout(500);
     const productsItemsList = await this.#page
-      .locator(`.${listType.cart}_list > .inventory_item`)
+      .locator(`.${listType.cart}_list > .${locatedOn.cart}_item`)
       .all();
 
     return productsItemsList.map(
@@ -49,7 +49,7 @@ export class ProductsPage extends BasePage {
   async getCartItem(index) {
     await this.#page.waitForTimeout(500);
     const foundItem = await this.#page
-      .locator(`.${listType.cart}_list > .inventory_item`)
+      .locator(`.${listType.cart}_list > .${locatedOn.cart}_item`)
       .nth(index);
 
     return new ProductItem(foundItem, locatedOn.item, listType.cart);
