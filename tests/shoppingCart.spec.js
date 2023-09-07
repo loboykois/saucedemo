@@ -1,9 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
 import { BasePage } from "../pageObjects/basePage/basePage";
-import { ProductsPage } from "../pageObjects/productsPage/products/productsPage";
+import {
+  ProductsPage,
+  ShoppingCartPage,
+} from "../pageObjects/productsPage/products/productsPage";
 
-test.describe("Shopping cart test suit", () => {
+test.describe("Shopping cart test suite", () => {
   test.beforeEach(async ({ page }) => {
     const loginPage = new SwagLabsLoginPage(page);
     await loginPage.visitLoginPage();
@@ -15,7 +18,7 @@ test.describe("Shopping cart test suit", () => {
     await loginPage.loginForm.pressLoginButton();
   });
 
-  test("When user press cart badge he should navigated on Cart page", async ({
+  test("When clicking on cart badge should navigate to shopping cart", async ({
     page,
   }) => {
     const basePage = new BasePage(page);
@@ -25,32 +28,32 @@ test.describe("Shopping cart test suit", () => {
     await expect(page).toHaveURL("https://www.saucedemo.com/cart.html");
   });
 
-  test("If no added products items to cart cart list should be empty", async ({
+  test("When clicking on cart badge and no items inside should show empty list", async ({
     page,
   }) => {
     const basePage = new BasePage(page);
     await basePage.openCartPage();
 
-    const inventoryArea = new ProductsPage(page);
-    const cartItems = await inventoryArea.getCartItems();
+    const inventoryArea = new ShoppingCartPage(page);
+    const cartItems = await inventoryArea.getProductsItems();
 
     expect(cartItems.length).toBe(0);
   });
 
-  test("All added products should be display on Cart page", async ({
-    page,
-  }) => {
+  // When then should
+  // should when
+
+  test("Should display all products inside shopping cart", async ({ page }) => {
     const inventoryArea = new ProductsPage(page);
     const productItems = await inventoryArea.getProductsItems();
 
     await productItems[0].addItemToCart();
     await productItems[1].addItemToCart();
 
-    const basePage = new BasePage(page);
-    await basePage.openCartPage();
+    await inventoryArea.openCartPage();
+    const shoppingCart = new ShoppingCartPage(page);
+    const cartItems = await shoppingCart.getProductsItems();
 
-    const cartItems = await inventoryArea.getCartItems();
-
-    expect(await cartItems.length).toBe(2);
+    expect(cartItems.length).toBe(2);
   });
 });

@@ -4,6 +4,24 @@ import {
   locatedOn,
 } from "../productsPage/products/productItem";
 
+// export class ShoppingCartItem extends ProductItem {
+//   constructor(page) {
+//     super(page, locatedOn.cart, listType.cart);
+//   }
+
+//   getQuantity() {
+//     return Number(this.#page.locator(".cart_quantity").innerText());
+//   }
+// }
+
+// export class ShoppingCartItem {
+//   details;
+//   quantity;
+//   constructor(page) {
+//     this.details = new ProductItem(page, locatedOn.cart, listType.cart);
+//   }
+// }
+
 export class ShoppingCartPage {
   constructor(page) {
     this.#page = page;
