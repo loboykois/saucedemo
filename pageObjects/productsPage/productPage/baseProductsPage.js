@@ -1,12 +1,9 @@
 import { BasePage } from "../../basePage/basePage";
-import { ProductItem, listType, locatedOn } from "./productItem";
-import { ShoppingCartBadge } from "../shoppingCartBadge";
+import { ProductItem, listType, locatedOn } from "../productItem/productItem";
 
 class BaseProductsPage extends BasePage {
   #page;
-
   #locatedOn;
-
   #listType;
 
   constructor(page, locatedOn, listType) {
@@ -14,7 +11,6 @@ class BaseProductsPage extends BasePage {
     this.#page = page;
     this.#locatedOn = locatedOn;
     this.#listType = listType;
-    this.shoppingCartBadge = new ShoppingCartBadge(page);
   }
 
   async getProductsItems() {
@@ -41,11 +37,7 @@ class BaseProductsPage extends BasePage {
 export class ProductsPage extends BaseProductsPage {
   constructor(page) {
     super(page, locatedOn.inventory, listType.inventory);
-  }
-}
-
-export class ShoppingCartPage extends BaseProductsPage {
-  constructor(page) {
-    super(page, locatedOn.cart, listType.cart);
+    //  this.productPage = new BaseProductsPage(page);
+    //  this.item = new ProductItem(page, locatedOn.inventory, listType.inventory);
   }
 }

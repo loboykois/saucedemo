@@ -1,5 +1,5 @@
-import { locatedOn } from "./products/productItem";
-import { ProductsPage } from "./products/productsPage";
+import { locatedOn } from "./productItem/productItem";
+import { ProductsPage } from "./productPage/baseProductsPage";
 
 export const optionType = {
   ascending: "az",

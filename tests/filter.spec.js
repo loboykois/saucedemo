@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { Filter, optionType } from "../pageObjects/productsPage/filter";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
-import { ProductsPage } from "../pageObjects/productsPage/products/productsPage";
+import { ProductsPage } from "../pageObjects/productsPage/productPage/baseProductsPage";
 import {
   byAlphabetAscending,
   byAlphabetDescending,

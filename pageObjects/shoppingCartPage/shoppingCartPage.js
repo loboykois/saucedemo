@@ -2,7 +2,25 @@ import {
   ProductItem,
   listType,
   locatedOn,
-} from "../productsPage/products/productItem";
+} from "../productsPage/productItem/productItem";
+import { ProductItem } from "../productsPage/productItem/productItem";
+import { BaseProductsPage } from "../productsPage/productPage/baseProductsPage";
+
+export class ShoppingCartPage extends BaseProductsPage {
+  constructor(page) {
+    super(page, locatedOn.cart, listType.cart);
+    //  this.productPage = new BaseProductsPage(page);
+    //  this.item = new ProductItem(page, locatedOn.cart, listType.cart);
+  }
+
+  async backToProducts() {
+    await this.page.locator("[data-test='continue-shopping']").click();
+  }
+
+  async checkOut() {
+    await this.page.locator("[data-test='checkout']").click();
+  }
+}
 
 // export class ShoppingCartItem extends ProductItem {
 //   constructor(page) {
@@ -21,28 +39,3 @@ import {
 //     this.details = new ProductItem(page, locatedOn.cart, listType.cart);
 //   }
 // }
-
-export class ShoppingCartPage {
-  constructor(page) {
-    this.#page = page;
-    this.productItem = new ProductItem(page, locatedOn.item, listType.cart);
-  }
-
-  async getGuantity() {
-    return Number(await this.#page.locator(".cart_quantity").innerText());
-  }
-
-  async removeFromCart() {
-    await this.#page
-      .locator("[data-test='remove-sauce-labs-backpack']")
-      .click();
-  }
-
-  async backToProducts() {
-    await this.#page.locator("[data-test='continue-shopping']").click();
-  }
-
-  async checkOut() {
-    await this.#page.locator("[data-test='checkout']").click();
-  }
-}

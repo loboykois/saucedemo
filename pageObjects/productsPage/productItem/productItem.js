@@ -1,13 +1,13 @@
+export const listType = {
+  inventory: "inventory",
+  cart: "cart",
+};
+
 export const locatedOn = {
   item: "item",
   details: "details",
   cart: "cart",
   inventory: "inventory",
-};
-
-export const listType = {
-  inventory: "inventory",
-  cart: "cart",
 };
 
 export class ProductItem {
@@ -66,5 +66,11 @@ export class ProductItem {
 
   async removeItemFromCart() {
     await this.#productLocator.locator("button:has-text('Remove')").click();
+  }
+
+  async getQuantity() {
+    return Number(
+      await this.#productLocator.locator(".cart_quantity").innerText()
+    );
   }
 }

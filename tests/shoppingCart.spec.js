@@ -1,10 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
 import { BasePage } from "../pageObjects/basePage/basePage";
-import {
-  ProductsPage,
-  ShoppingCartPage,
-} from "../pageObjects/productsPage/products/productsPage";
+import { ProductsPage } from "../pageObjects/productsPage/productPage/baseProductsPage";
+import { ShoppingCartPage } from "../pageObjects/shoppingCartPage/shoppingCartPage";
 
 test.describe("Shopping cart test suite", () => {
   test.beforeEach(async ({ page }) => {
