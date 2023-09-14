@@ -21,6 +21,10 @@ export class ProductItem {
     this.#listType = listType;
   }
 
+  getLocator() {
+    return this.#productLocator;
+  }
+
   async openDetailedProductDescription(navigationType) {
     const navigationSelector =
       navigationType == "image"
@@ -66,11 +70,5 @@ export class ProductItem {
 
   async removeItemFromCart() {
     await this.#productLocator.locator("button:has-text('Remove')").click();
-  }
-
-  async getQuantity() {
-    return Number(
-      await this.#productLocator.locator(".cart_quantity").innerText()
-    );
   }
 }

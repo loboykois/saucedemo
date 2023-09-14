@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
-import { ProductsPage } from "../pageObjects/productsPage/productPage/baseProductsPage";
+import { ProductsPage } from "../pageObjects/productsPage/productPage/productsPage";
 import { ProductDetailsPage } from "../pageObjects/productsPage/productsDetails/productDetailsPage";
 
 test.describe("Product details test suite", () => {

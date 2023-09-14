@@ -1,16 +1,20 @@
 import { BasePage } from "../../basePage/basePage";
-import { ProductItem, listType, locatedOn } from "../productItem/productItem";
+import { ProductItem, locatedOn, listType } from "./productItem";
 
-class BaseProductsPage extends BasePage {
+export class ProductsPage extends BasePage {
   #page;
   #locatedOn;
   #listType;
-
-  constructor(page, locatedOn, listType) {
+  constructor(page) {
     super(page);
     this.#page = page;
-    this.#locatedOn = locatedOn;
+    this.#locatedOn = locatedOn.inventory;
+    this.#listType = listType.inventory;
+  }
+
+  setContext(locatedOn, listType) {
     this.#listType = listType;
+    this.#locatedOn = locatedOn;
   }
 
   async getProductsItems() {
@@ -31,13 +35,5 @@ class BaseProductsPage extends BasePage {
       .nth(index);
 
     return new ProductItem(foundItem, locatedOn.item, this.#listType);
-  }
-}
-
-export class ProductsPage extends BaseProductsPage {
-  constructor(page) {
-    super(page, locatedOn.inventory, listType.inventory);
-    //  this.productPage = new BaseProductsPage(page);
-    //  this.item = new ProductItem(page, locatedOn.inventory, listType.inventory);
   }
 }

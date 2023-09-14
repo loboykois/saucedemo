@@ -1,41 +1,36 @@
-import {
-  ProductItem,
-  listType,
-  locatedOn,
-} from "../productsPage/productItem/productItem";
-import { ProductItem } from "../productsPage/productItem/productItem";
-import { BaseProductsPage } from "../productsPage/productPage/baseProductsPage";
+import { BasePage } from "../basePage/basePage";
+import { listType, locatedOn } from "../productsPage/productPage/productItem";
+import { ShoppingCartItem } from "./shoppingCartItem";
+import { ProductsPage } from "../productsPage/productPage/productsPage";
 
-export class ShoppingCartPage extends BaseProductsPage {
+export class ShoppingCartPage extends BasePage {
+  #page;
+  #productsPage;
+
   constructor(page) {
-    super(page, locatedOn.cart, listType.cart);
-    //  this.productPage = new BaseProductsPage(page);
-    //  this.item = new ProductItem(page, locatedOn.cart, listType.cart);
+    super(page);
+    this.#page = page;
+    this.#productsPage = new ProductsPage(page);
+    this.#productsPage.setContext(locatedOn.cart, listType.cart);
   }
 
   async backToProducts() {
-    await this.page.locator("[data-test='continue-shopping']").click();
+    await this.#page.locator("[data-test='continue-shopping']").click();
   }
 
   async checkOut() {
-    await this.page.locator("[data-test='checkout']").click();
+    await this.#page.locator("[data-test='checkout']").click();
+  }
+
+  async getItems() {
+    const productsItems = await this.#productsPage.getProductsItems();
+
+    return productsItems.map((i) => new ShoppingCartItem(i));
+  }
+
+  async getItem(index) {
+    const productItem = await this.#productsPage.getProductItem(index);
+
+    return new ShoppingCartItem(productItem);
   }
 }
-
-// export class ShoppingCartItem extends ProductItem {
-//   constructor(page) {
-//     super(page, locatedOn.cart, listType.cart);
-//   }
-
-//   getQuantity() {
-//     return Number(this.#page.locator(".cart_quantity").innerText());
-//   }
-// }
-
-// export class ShoppingCartItem {
-//   details;
-//   quantity;
-//   constructor(page) {
-//     this.details = new ProductItem(page, locatedOn.cart, listType.cart);
-//   }
-// }

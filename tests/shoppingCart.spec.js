@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
 import { BasePage } from "../pageObjects/basePage/basePage";
-import { ProductsPage } from "../pageObjects/productsPage/productPage/baseProductsPage";
+import { ProductsPage } from "../pageObjects/productsPage/productPage/productsPage";
 import { ShoppingCartPage } from "../pageObjects/shoppingCartPage/shoppingCartPage";
 
 test.describe("Shopping cart test suite", () => {
@@ -33,13 +33,10 @@ test.describe("Shopping cart test suite", () => {
     await basePage.openCartPage();
 
     const inventoryArea = new ShoppingCartPage(page);
-    const cartItems = await inventoryArea.getProductsItems();
+    const cartItems = await inventoryArea.getItems();
 
     expect(cartItems.length).toBe(0);
   });
-
-  // When then should
-  // should when
 
   test("Should display all products inside shopping cart", async ({ page }) => {
     const inventoryArea = new ProductsPage(page);
@@ -50,8 +47,23 @@ test.describe("Shopping cart test suite", () => {
 
     await inventoryArea.openCartPage();
     const shoppingCart = new ShoppingCartPage(page);
-    const cartItems = await shoppingCart.getProductsItems();
+    const cartItems = await shoppingCart.getItems();
 
     expect(cartItems.length).toBe(2);
+  });
+
+  test("Should display quantity 1 in first item", async ({ page }) => {
+    const inventoryArea = new ProductsPage(page);
+    const productItems = await inventoryArea.getProductsItems();
+
+    await productItems[0].addItemToCart();
+    await productItems[1].addItemToCart();
+
+    await inventoryArea.openCartPage();
+    const shoppingCart = new ShoppingCartPage(page);
+    const cartItems = await shoppingCart.getItems();
+    const cartItemQuantity = await cartItems[0].getQuantity();
+
+    expect(cartItemQuantity).toBe(1);
   });
 });
