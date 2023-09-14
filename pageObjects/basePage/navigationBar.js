@@ -1,10 +1,13 @@
-const linksMap = {
-    about: "#about_sidebar_link",
+// create Map of links for page navigation using object construction
+
+export const navigationLinksMap = {
+  inventory: "#inventory_sidebar_link22",
+  about: "#about_sidebar_link",
+  logout: "#logout_sidebar_link",
+  resetAppState: "#reset_sidebar_link",
 };
 
 export class NavigationBar {
-  #aboutLinkId = 'selector';
-
   #page;
   constructor(page) {
     this.#page = page;
@@ -19,16 +22,7 @@ export class NavigationBar {
     return this.#page.locator("nav").isVisible();
   }
 
-  // iphone => 'lightning'
-  // samsung => 'typec'
-  async getCharger(phoneModel) {
-    return Map[phoneModel];
-  }
-
-  // linktype: 'about'
-  async navigate(linkType) {
-    const selector = linksMap[linkType];
-
+  async navigate(selector) {
     this.#page.locator(selector).click();
   }
 }

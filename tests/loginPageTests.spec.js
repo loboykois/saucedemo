@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { SwagLabsLoginPage } from "../pageObjects/loginPage";
+import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
 
 // Swag Labs Login page Functional tests
 
@@ -13,11 +13,13 @@ test.describe("Login page Swag Labs Functional tests", () => {
     page,
   }) => {
     const loginPage = new SwagLabsLoginPage(page);
+
     const userName = await loginPage.pageLegend.getUserNameByType("standard");
     await loginPage.enterUserName(userName);
     const password = await loginPage.pageLegend.getPassword();
     await loginPage.enterPassword(password);
     await loginPage.loginForm.pressLoginButton();
+
     await expect(page).toHaveURL("https://www.saucedemo.com/inventory.html");
   });
 
