@@ -1,18 +1,14 @@
 import { BaseForm } from "../../basePage/baseForm";
 
-export class LoginForm {
+export class CheckoutForm {
   #page;
 
   constructor(page) {
     this.#page = page;
     this.form = new BaseForm(page);
-    this.userNameField = this.form.userNameField;
-    this.passwordField = this.form.passwordField;
-    this.loginButton = page.locator("[data-test=login-button]");
-  }
-
-  async pressLoginButton() {
-    await this.loginButton.click();
+    this.firstName = this.form.firstName;
+    this.lastName = this.form.lastName;
+    this.postalCode = this.form.postalCode;
   }
 
   async getValidationError() {

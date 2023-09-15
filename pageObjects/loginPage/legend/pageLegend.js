@@ -5,19 +5,9 @@ export class LoginPageLegend {
   }
 
   async getPassword() {
-    // Implement retrieve of password
     const innerText = await this.#page.locator(".login_password").textContent();
     const password = innerText.split(":")[1];
     return password;
-
-    //  const textContent = await this.#page
-    //    .locator(".login_password")
-    //    .allInnerTexts();
-    //  console.info("INNER: " + innerText);
-    //  console.info("TEXT: " + textContent);
-    //  const result = innerText.split("\n")[1];
-    //  console.info("TEXT: " + result);
-    //  return result;
   }
 
   async getUserNames() {

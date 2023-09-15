@@ -6,7 +6,6 @@ export class BasePage {
   #page;
   constructor(page) {
     this.#page = page;
-
     this.navigationBar = new NavigationBar(page);
     this.pageFooter = new PageFooter(page);
     this.shoppingCartBadge = new ShoppingCartBadge(page);
