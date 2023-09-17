@@ -3,15 +3,6 @@ export class BaseForm {
 
   constructor(page) {
     this.#page = page;
-
-    //  Login form fields
-    this.userNameField = page.locator("[data-test='username']");
-    this.passwordField = page.locator("[data-test='password']");
-
-    //  Checkout form fields
-    this.firstName = page.locator("[data-test='firstName']");
-    this.lastName = page.locator("[data-test='lastName']");
-    this.postalCode = page.locator("[data-test='postalCode']");
   }
 
   async getErrorBlock() {

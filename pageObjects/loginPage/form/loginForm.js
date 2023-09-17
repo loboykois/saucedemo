@@ -6,8 +6,8 @@ export class LoginForm {
   constructor(page) {
     this.#page = page;
     this.form = new BaseForm(page);
-    this.userNameField = this.form.userNameField;
-    this.passwordField = this.form.passwordField;
+    this.userNameField = page.locator("[data-test='username']");
+    this.passwordField = page.locator("[data-test='password']");
     this.loginButton = page.locator("[data-test=login-button]");
   }
 

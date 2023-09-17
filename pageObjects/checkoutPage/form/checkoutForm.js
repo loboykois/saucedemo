@@ -6,9 +6,9 @@ export class CheckoutForm {
   constructor(page) {
     this.#page = page;
     this.form = new BaseForm(page);
-    this.firstName = this.form.firstName;
-    this.lastName = this.form.lastName;
-    this.postalCode = this.form.postalCode;
+    this.firstName = page.locator("[data-test='firstName']");
+    this.lastName = page.locator("[data-test='lastName']");
+    this.postalCode = page.locator("[data-test='postalCode']");
   }
 
   async getValidationError() {
