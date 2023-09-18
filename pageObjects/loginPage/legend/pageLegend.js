@@ -20,11 +20,8 @@ export class LoginPageLegend {
     return resultItems;
   }
 
-  // standard, locked, problem, performance
   async getUserNameByType(type) {
     const userNames = await this.getUserNames();
     return userNames.find((item) => item.indexOf(type) === 0);
   }
-
-  // ["standard_user","locked_out_user","problem_user","performance_glitch_user"]
 }
