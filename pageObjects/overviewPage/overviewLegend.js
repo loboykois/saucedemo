@@ -1,9 +1,9 @@
-export const summaryMap = {
+export const summary = {
   info: "info",
   value: "value",
-  subtotal: "subtotal",
-  total: "total",
+  subtotalPrice: "subtotal",
   tax: "tax",
+  totalPrice: "total",
 };
 
 export class OverviewLegend {
@@ -30,10 +30,15 @@ export class OverviewLegend {
     };
   }
 
-//   async getTotalPrice() {
-//     const totalPrice = await this.#page
-//       .locator(".summary_subtotal_label")
-//       .allInnerTexts();
-//     const splitPrice = totalPrice[0].split("\n");
-//   }
+  async getSummaryInfo(labelType) {
+    const text = await this.#page
+      .locator(`.summary_${labelType}_label`)
+      .allInnerTexts();
+    const splitText = text.split("\n");
+
+    return {
+      symbol: splitText[0].charAt(splitText.length - 1),
+      amount: Number(splitText[1]),
+    };
+  }
 }

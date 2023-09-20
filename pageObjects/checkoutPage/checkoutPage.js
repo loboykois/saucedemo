@@ -7,7 +7,7 @@ export class CheckoutPage extends BasePage {
   constructor(page) {
     super(page);
     this.#page = page;
-    this.checkoutForm = new CheckoutForm(page);
+    this.checkoutFrom = new CheckoutForm(page);
   }
 
   async pressCancel() {

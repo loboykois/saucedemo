@@ -13,4 +13,12 @@ export class OverviewPage extends BasePage {
     this.#productsPage.setContext(locatedOn.cart, listType.cart);
     this.legend = new OverviewLegend(page);
   }
+
+  async backToProducts() {
+    await this.#page.locator("button:has-text('Cancel')").click();
+  }
+
+  async finishOrder() {
+    await this.#page.locator("button:has-text('Finish')").click();
+  }
 }
