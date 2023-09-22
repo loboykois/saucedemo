@@ -5,6 +5,10 @@ import { ShoppingCartPage } from "../pageObjects/shoppingCartPage/shoppingCartPa
 import { CheckoutPage } from "../pageObjects/checkoutPage/checkoutPage";
 
 test.describe("Checkout page test suite", () => {
+  const fakeFormData = {
+    firstName: 'test',
+  };
+
   test.beforeEach(async ({ page }) => {
     const loginPage = new SwagLabsLoginPage(page);
     await loginPage.visitLoginPage();
@@ -30,7 +34,11 @@ test.describe("Checkout page test suite", () => {
     );
   });
 
-  test("When user navigated to checkout page form for user information should be display", async ({
+  // test("When user navigated to checkout page form for user information should be display", async ({
+  // when should
+  // should when
+  // should display user info form when navigated to checkout page
+  test("When user navigated to checkout page should display user info form", async ({
     page,
   }) => {
     const inventoryArea = new ProductsPage(page);
@@ -45,7 +53,7 @@ test.describe("Checkout page test suite", () => {
     await expect(checkoutFormLocator).toBeVisible();
   });
 
-  test("When user not filled any information in checkout form should display error", async ({
+  test("When user does not fill any information in checkout form should display error", async ({
     page,
   }) => {
     const inventoryArea = new ProductsPage(page);
@@ -74,7 +82,7 @@ test.describe("Checkout page test suite", () => {
     await shoppingCart.checkOut();
 
     const checkOutPage = new CheckoutPage(page);
-    await checkOutPage.checkoutFrom.firstName.fill("Ilia");
+    await checkOutPage.checkoutFrom.firstName.fill(fakeFormData.firstName);
     await checkOutPage.pressContinue();
 
     const lastNameErrorText =
@@ -94,6 +102,8 @@ test.describe("Checkout page test suite", () => {
     await shoppingCart.checkOut();
 
     const checkOutPage = new CheckoutPage(page);
+    // await checkOutPage.checkoutFrom.fillDetails({ firstName: 'Illia' });
+
     await checkOutPage.checkoutFrom.firstName.fill("Ilia");
     await checkOutPage.checkoutFrom.lastName.fill("Loboiko");
     await checkOutPage.pressContinue();
@@ -105,7 +115,7 @@ test.describe("Checkout page test suite", () => {
     expect(postalCodeErrorText).toEqual(thirdExpectedErrorMessageText);
   });
 
-  test("When user filled all information in form he should be navigated at Overview page", async ({
+  test("When user filled all information in form should be navigated to Overview page", async ({
     page,
   }) => {
     const inventoryArea = new ProductsPage(page);

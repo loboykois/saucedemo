@@ -6,6 +6,8 @@ export const summary = {
   totalPrice: "total",
 };
 
+const page = new OverviewLegend();
+
 export class OverviewLegend {
   #page;
   constructor(page) {
@@ -19,7 +21,7 @@ export class OverviewLegend {
 
     return {
       payment: {
-        type: String(payment.split(" ").slice(0, 1)),
+        type: payment.split(" ").at(0),
         cardSymbol: String(payment.split(" ")[1].slice(0, 1)),
         cardId: Number(payment.split(" ")[1].filter((id) => id !== "#")),
         get fullInfo() {

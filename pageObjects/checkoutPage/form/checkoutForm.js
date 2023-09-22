@@ -12,6 +12,12 @@ export class CheckoutForm {
     this.postalCode = page.locator("[data-test='postalCode']");
   }
 
+  fillDetails({ firstName, lastName, postCode }) {
+    if (firstName) {
+      this.firstName.fill(firstName);
+    }
+  }
+
   async getValidationError() {
     return this.form.getErrorBlock();
   }
