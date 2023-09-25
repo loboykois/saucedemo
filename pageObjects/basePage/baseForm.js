@@ -5,12 +5,12 @@ export class BaseForm {
     this.#page = page;
   }
 
-  async getErrorBlock() {
+  async getValidationError() {
     return this.#page.locator("[data-test='error']");
   }
 
-  async getErrorText() {
-    const errorBlock = await this.getErrorBlock();
+  async getValidationErrorText() {
+    const errorBlock = await this.getValidationError();
     const errorText = await errorBlock.innerText();
     return errorText;
   }
