@@ -3,13 +3,16 @@ import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
 import { ProductsPage } from "../pageObjects/productsPage/productPage/productsPage";
 import { ShoppingCartPage } from "../pageObjects/shoppingCartPage/shoppingCartPage";
 import { CheckoutPage } from "../pageObjects/checkoutPage/checkoutPage";
+import { fakeFormData } from "./tools/fakeFormData";
+
+
 
 test.describe("Checkout page test suite", () => {
-  const fakeFormData = {
-    firstName: "test",
-    lastName: "test2",
-    postalCode: "12345",
-  };
+  //   const fakeFormData = {
+  //     firstName: "test",
+  //     lastName: "test2",
+  //     postalCode: "12345",
+  //   };
 
   test.beforeEach(async ({ page }) => {
     const loginPage = new SwagLabsLoginPage(page);
@@ -20,16 +23,22 @@ test.describe("Checkout page test suite", () => {
     await loginPage.enterUserName(userName);
     await loginPage.enterPassword(password);
     await loginPage.loginForm.pressLoginButton();
-  });
 
-  test("When user clicked on Checkout button should navigate to checkout form", async ({
-    page,
-  }) => {
     const inventoryArea = new ProductsPage(page);
     await inventoryArea.openCartPage();
 
     const shoppingCart = new ShoppingCartPage(page);
     await shoppingCart.checkOut();
+  });
+
+  test("When user clicked on Checkout button should navigate to checkout form", async ({
+    page,
+  }) => {
+    //  const inventoryArea = new ProductsPage(page);
+    //  await inventoryArea.openCartPage();
+
+    //  const shoppingCart = new ShoppingCartPage(page);
+    //  await shoppingCart.checkOut();
 
     await expect(page).toHaveURL(
       "https://www.saucedemo.com/checkout-step-one.html"
@@ -39,11 +48,11 @@ test.describe("Checkout page test suite", () => {
   test("When user navigated to checkout page should display user info form", async ({
     page,
   }) => {
-    const inventoryArea = new ProductsPage(page);
-    await inventoryArea.openCartPage();
+    //  const inventoryArea = new ProductsPage(page);
+    //  await inventoryArea.openCartPage();
 
-    const shoppingCart = new ShoppingCartPage(page);
-    await shoppingCart.checkOut();
+    //  const shoppingCart = new ShoppingCartPage(page);
+    //  await shoppingCart.checkOut();
 
     const checkOutPage = new CheckoutPage(page);
     const checkoutFormLocator = await checkOutPage.checkoutFrom.formLocator;
@@ -52,13 +61,13 @@ test.describe("Checkout page test suite", () => {
   });
 
   test.describe("When user does not fill || filled", () => {
-    test.beforeEach(async ({ page }) => {
-      const inventoryArea = new ProductsPage(page);
-      await inventoryArea.openCartPage();
+    //  test.beforeEach(async ({ page }) => {
+    //    const inventoryArea = new ProductsPage(page);
+    //    await inventoryArea.openCartPage();
 
-      const shoppingCart = new ShoppingCartPage(page);
-      await shoppingCart.checkOut();
-    });
+    //    const shoppingCart = new ShoppingCartPage(page);
+    //    await shoppingCart.checkOut();
+    //  });
 
     test("any information in checkout form should display error", async ({
       page,
@@ -121,11 +130,11 @@ test.describe("Checkout page test suite", () => {
   test("all information in form should be navigated to Overview page", async ({
     page,
   }) => {
-    const inventoryArea = new ProductsPage(page);
-    await inventoryArea.openCartPage();
+    //  const inventoryArea = new ProductsPage(page);
+    //  await inventoryArea.openCartPage();
 
-    const shoppingCart = new ShoppingCartPage(page);
-    await shoppingCart.checkOut();
+    //  const shoppingCart = new ShoppingCartPage(page);
+    //  await shoppingCart.checkOut();
 
     const checkOutPage = new CheckoutPage(page);
     await checkOutPage.checkoutFrom.firstName.fill(fakeFormData.firstName);

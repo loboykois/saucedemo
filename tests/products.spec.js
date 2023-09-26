@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
 import { ProductsPage } from "../pageObjects/productsPage/productPage/productsPage";
 
-test.describe("Products items test suit", () => {
+test.describe("Products items test suite", () => {
   test.beforeEach(async ({ page }) => {
     const loginPage = new SwagLabsLoginPage(page);
     await loginPage.visitLoginPage();
