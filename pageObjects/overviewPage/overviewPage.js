@@ -1,6 +1,7 @@
 import { listType, locatedOn } from "../productsPage/productPage/productItem";
 import { ProductsPage } from "../productsPage/productPage/productsPage";
 import { BasePage } from "../basePage/basePage";
+import { OverviewSummary } from "./overviewSummary";
 
 export class OverviewPage extends BasePage {
   #page;
@@ -11,7 +12,7 @@ export class OverviewPage extends BasePage {
     this.#page = page;
     this.#productsPage = new ProductsPage(page);
     this.#productsPage.setContext(locatedOn.cart, listType.cart);
-    this.legend = new OverviewLegend(page);
+    this.summary = new OverviewSummary(page);
   }
 
   async backToProducts() {

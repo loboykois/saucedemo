@@ -1,20 +1,15 @@
 import { test, expect } from "@playwright/test";
-import { SwagLabsLoginPage } from "../pageObjects/loginPage/loginPage";
 import { ProductsPage } from "../pageObjects/productsPage/productPage/productsPage";
 import { ShoppingCartPage } from "../pageObjects/shoppingCartPage/shoppingCartPage";
 import { CheckoutPage } from "../pageObjects/checkoutPage/checkoutPage";
 import { fakeFormData } from "./tools/fakeFormData";
+import { standardUserLogin } from "./tools/authorization";
+import { OverviewPage } from "../pageObjects/overviewPage/overviewPage";
+import { priceType } from "../pageObjects/overviewPage/overviewSummary";
 
 test.describe("Checkout: Overview test suite", () => {
   test.beforeEach(async ({ page }) => {
-    const loginPage = new SwagLabsLoginPage(page);
-    await loginPage.visitLoginPage();
-    const userName = await loginPage.pageLegend.getUserNameByType("standard");
-    const password = await loginPage.pageLegend.getPassword();
-
-    await loginPage.enterUserName(userName);
-    await loginPage.enterPassword(password);
-    await loginPage.loginForm.pressLoginButton();
+    await standardUserLogin(page);
 
     const inventoryArea = new ProductsPage(page);
     const productItems = await inventoryArea.getProductsItems();
@@ -34,5 +29,25 @@ test.describe("Checkout: Overview test suite", () => {
     await checkOutPage.pressContinue();
   });
 
-  //   TODO: write tests for overview summary, check amount of products on overview page, finish order and go to complete page
+  test("Should navigate to Overview page when user filled all data in Checkout form", async ({
+    page,
+  }) => {
+    await expect(page).toHaveURL(
+      "https://www.saucedemo.com/checkout-step-two.html"
+    );
+  });
+
+  test.describe("Should display summary ", () => {
+    test("total price zero when user has not added products in cart", async ({
+      page,
+    }) => {
+      const overviewPage = new OverviewPage(page);
+      const itemTotal = await overviewPage.summary.getSummaryPriceInfo(
+        priceType.item
+      );
+      const itemAmount = itemTotal.amount;
+
+      expect(itemAmount).toBe(0);
+    });
+  });
 });
