@@ -1,7 +1,6 @@
 import { SwagLabsLoginPage } from "../../pageObjects/loginPage/loginPage";
 
-
-export async function standardUserLogin(page) {
+export async function loginAsStandardUser(page) {
   const loginPage = new SwagLabsLoginPage(page);
   await loginPage.visitLoginPage();
 

@@ -1,7 +1,7 @@
 export const priceType = {
-  item: ".summary_subtotal_label",
-  tax: ".summary_tax_label",
-  totalPrice: ".summary_total_label",
+  item: "subtotal",
+  tax: "tax",
+  totalPrice: "total",
 };
 
 export class OverviewSummary {
@@ -66,15 +66,15 @@ export class OverviewSummary {
   //     };
   //   }
 
-  async getSummaryPriceInfo(byType) {
+  async getPriceInfoByType(byType) {
     const price = await this.#page
       .locator(`.summary_${byType}_label`)
       .allInnerTexts();
-    const splitText = price.split("\n");
+    const splitText = price.at(0).split(" ");
 
     return {
       currency: splitText[0].at(-1),
-      amount: parseFloat(splitText[1]).toFixed(2),
+      amount: Number(splitText.at(2).slice(1)),
     };
   }
 }
