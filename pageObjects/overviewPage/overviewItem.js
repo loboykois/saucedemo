@@ -1,3 +1,6 @@
+// TODO: extends from shopping cart item
+
+
 export class OverviewItem {
   #itemLocator;
 

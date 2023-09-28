@@ -16,10 +16,18 @@ test.describe("Checkout: Overview test suite", () => {
     page,
   }) => {
     const inventoryArea = new ProductsPage(page);
+
+    // was 
     await inventoryArea.openCartPage();
 
     const shoppingCart = new ShoppingCartPage(page);
     await shoppingCart.checkOut();
+    // // was
+
+    // //became
+    // const shoppingCart = await inventoryArea.openCartPage();
+    // await shoppingCart.checkOut();
+    // // became
 
     const checkOutPage = new CheckoutPage(page);
     await checkOutPage.checkoutFrom.firstName.fill(fakeFormData.firstName);
