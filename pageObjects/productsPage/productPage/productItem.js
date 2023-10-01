@@ -37,7 +37,7 @@ export class ProductItem {
 
   async getItemTitle() {
     const productTitle = await this.#productLocator
-      .locator(`.${this.#listType}_${this.#locatedOn}_name`)
+      .locator(`.inventory_${this.#locatedOn}_name`)
       .innerText();
 
     return productTitle;
@@ -45,7 +45,7 @@ export class ProductItem {
 
   async getItemDescription() {
     const productDescription = await this.#productLocator
-      .locator(`.${this.#listType}_${this.#locatedOn}_desc`)
+      .locator(`.inventory_${this.#locatedOn}_desc`)
       .innerText();
 
     return productDescription;
@@ -53,7 +53,7 @@ export class ProductItem {
 
   async getItemPrice() {
     const priceBar = await this.#productLocator
-      .locator(`.${this.#listType}_${this.#locatedOn}_price`)
+      .locator(`.inventory_${this.#locatedOn}_price`)
       .innerText();
 
     return {

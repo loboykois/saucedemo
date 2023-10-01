@@ -64,16 +64,47 @@ test.describe("Checkout: Overview test suite", () => {
   }) => {
     const inventoryArea = new ProductsPage(page);
     const productItems = await inventoryArea.getProductsItems();
-    //  const productItemPrice = await productItems[0].getItemPrice();
-    //  const productItemValue = productItemPrice.value;
     await productItems[0].addItemToCart();
 
     await inventoryArea.openCartPage();
     const shoppingCart = new ShoppingCartPage(page);
     const shoppingCartItems = await shoppingCart.getItems();
     const cartItem = await shoppingCartItems[0];
-    const cartItemPrice = await cartItem.getItemPrice();
+    const cartItemPrice = await cartItem.details.getItemPrice();
     const cartItemValue = cartItemPrice.value;
+
+    await shoppingCart.checkOut();
+
+    const checkOutPage = new CheckoutPage(page);
+    await checkOutPage.checkoutFrom.firstName.fill(fakeFormData.firstName);
+    await checkOutPage.checkoutFrom.lastName.fill(fakeFormData.lastName);
+    await checkOutPage.checkoutFrom.postalCode.fill(fakeFormData.postalCode);
+    await checkOutPage.pressContinue();
+
+    const overviewPage = new OverviewPage(page);
+
+    const itemTotal = await overviewPage.summary.getPriceInfoByType(
+      priceType.item
+    );
+    const itemAmount = itemTotal.amount;
+
+    expect(itemAmount).toBe(cartItemValue);
+  });
+
+  test("Should display sum prices of items when user has added several products in cart", async ({
+    page,
+  }) => {
+    const inventoryArea = new ProductsPage(page);
+    const productItems = await inventoryArea.getProductsItems();
+    await productItems[0].addItemToCart();
+    await productItems[1].addItemToCart();
+    await productItems[2].addItemToCart();
+
+    await inventoryArea.openCartPage();
+    const shoppingCart = new ShoppingCartPage(page);
+    const cartItems = await shoppingCart.getItems();
+
+    //  TODO: know how get sum of prices of all products in cart using for ()
 
     await shoppingCart.checkOut();
 
