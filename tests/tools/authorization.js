@@ -1,6 +1,6 @@
 import { SwagLabsLoginPage } from "../../pageObjects/loginPage/loginPage";
 
-const loginAsUser = async(userType) => {
+const loginAsUser = async (userType, page) => {
   const loginPage = new SwagLabsLoginPage(page);
   await loginPage.visitLoginPage();
 
@@ -10,12 +10,8 @@ const loginAsUser = async(userType) => {
   await loginPage.enterUserName(userName);
   await loginPage.enterPassword(password);
   await loginPage.loginForm.pressLoginButton();
-}
+};
 
 export async function loginAsStandardUser(page) {
-  await loginAsUser("standard");
-}
-
-export async function loginAsOtherUser(page) {
-  await loginAsUser("standard");
+  await loginAsUser("standard", page);
 }

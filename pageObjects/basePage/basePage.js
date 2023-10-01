@@ -1,7 +1,6 @@
 import { PageFooter } from "./footer";
 import { NavigationBar } from "./navigationBar";
 import { ShoppingCartBadge } from "../productsPage/shoppingCartBadge";
-import { ShoppingCartPage } from "../shoppingCartPage/shoppingCartPage";
 
 export class BasePage {
   #page;
@@ -26,6 +25,5 @@ export class BasePage {
 
   async openCartPage() {
     await this.#page.locator(".shopping_cart_link").click();
-    return new ShoppingCartPage(this.#page);
   }
 }

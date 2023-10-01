@@ -30,42 +30,6 @@ export class OverviewSummary {
     return shipping;
   }
 
-  //   async getItemTotalInfo() {
-  //     const itemTotalText = await this.#page
-  //       .locator(`.summary_${summaryLabels.subtotalPrice}_label`)
-  //       .allInnerTexts();
-  //     const splitText = itemTotalText.split("\n");
-
-  //     return {
-  //       currency: splitText[0].at(-1),
-  //       amount: parseFloat(splitText[1]).toFixed(2),
-  //     };
-  //   }
-
-  //   async getTaxInfo() {
-  //     const taxText = await this.#page
-  //       .locator(`.summary_${summaryLabels.tax}_label`)
-  //       .allInnerTexts();
-  //     const splitText = taxText.split("\n");
-
-  //     return {
-  //       currency: splitText[0].at(-1),
-  //       amount: parseFloat(splitText[1]).toFixed(2),
-  //     };
-  //   }
-
-  //   async getTotalPriceInfo() {
-  //     const totalPrice = await this.#page
-  //       .locator(`.summary_${summaryLabels.totalPrice}_label`)
-  //       .allInnerTexts();
-  //     const splitText = totalPrice.split("\n");
-
-  //     return {
-  //       currency: splitText[0].at(-1),
-  //       amount: parseFloat(splitText[1]).toFixed(2),
-  //     };
-  //   }
-
   async getPriceInfoByType(byType) {
     const price = await this.#page
       .locator(`.summary_${byType}_label`)

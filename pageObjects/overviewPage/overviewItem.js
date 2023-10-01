@@ -1,17 +1,11 @@
-// TODO: extends from shopping cart item
+import { ShoppingCartItem } from "../shoppingCartPage/shoppingCartItem";
 
-
-export class OverviewItem {
+export class OverviewItem extends ShoppingCartItem {
   #itemLocator;
 
   constructor(productItem) {
+    super(productItem);
     this.#itemLocator = productItem.getLocator();
     this.details = productItem;
-  }
-
-  async getQuantity() {
-    return Number(
-      await this.#itemLocator.locator(".cart_quantity").innerText()
-    );
   }
 }
