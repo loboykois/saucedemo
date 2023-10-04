@@ -6,7 +6,7 @@ import { fakeFormData } from "./tools/fakeFormData";
 import { loginAsStandardUser } from "./tools/authorization";
 import { OverviewPage } from "../pageObjects/overviewPage/overviewPage";
 import { priceType } from "../pageObjects/overviewPage/overviewSummary";
-import { ShoppingCartItem } from "../pageObjects/shoppingCartPage/shoppingCartItem";
+import { Console } from "console";
 
 test.describe("Checkout: Overview test suite", () => {
   test.beforeEach(async ({ page }) => {
@@ -102,9 +102,16 @@ test.describe("Checkout: Overview test suite", () => {
 
     await inventoryArea.openCartPage();
     const shoppingCart = new ShoppingCartPage(page);
-    const cartItems = await shoppingCart.getItems();
+    const shoppingCartItems = await shoppingCart.getItems();
+    let totalAmount = 0;
 
-    //  TODO: know how get sum of prices of all products in cart using for ()
+    for (let i = 0; i < shoppingCartItems.length; i++) {
+      const cartItem = await shoppingCartItems[i];
+      const cartItemPrice = await cartItem.details.getItemPrice();
+      const cartItemValue = cartItemPrice.value;
+
+      return (totalAmount += cartItemValue);
+    }
 
     await shoppingCart.checkOut();
 
@@ -121,6 +128,44 @@ test.describe("Checkout: Overview test suite", () => {
     );
     const itemAmount = itemTotal.amount;
 
-    expect(itemAmount).toBe(cartItemValue);
+    expect(itemAmount).toBe(totalAmount);
+  });
+
+  test("Should display Total like sum of Price total fields (item total & tax) when user added several product in cart", async ({
+    page,
+  }) => {
+    const inventoryArea = new ProductsPage(page);
+    const productItems = await inventoryArea.getProductsItems();
+    await productItems[0].addItemToCart();
+    await productItems[1].addItemToCart();
+
+    await inventoryArea.openCartPage();
+    const shoppingCart = new ShoppingCartPage(page);
+    await shoppingCart.checkOut();
+
+    const checkOutPage = new CheckoutPage(page);
+    await checkOutPage.checkoutFrom.firstName.fill(fakeFormData.firstName);
+    await checkOutPage.checkoutFrom.lastName.fill(fakeFormData.lastName);
+    await checkOutPage.checkoutFrom.postalCode.fill(fakeFormData.postalCode);
+    await checkOutPage.pressContinue();
+
+    const overviewPage = new OverviewPage(page);
+
+    const itemTotal = await overviewPage.summary.getPriceInfoByType(
+      priceType.item
+    );
+    const itemTotalValue = itemTotal.amount;
+
+    const tax = await overviewPage.summary.getPriceInfoByType(priceType.tax);
+    const taxValue = tax.amount;
+
+    const sum = itemTotalValue + taxValue;
+
+    const total = await overviewPage.summary.getPriceInfoByType(
+      priceType.totalPrice
+    );
+    const totalValue = total.amount;
+
+    expect(totalValue).toBe(sum);
   });
 });

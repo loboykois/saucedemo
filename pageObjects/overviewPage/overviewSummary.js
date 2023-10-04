@@ -31,13 +31,13 @@ export class OverviewSummary {
   }
 
   async getPriceInfoByType(byType) {
-    const price = await this.#page
+    const priceLocator = await this.#page
       .locator(`.summary_${byType}_label`)
-      .allInnerTexts();
-    const splitText = price.at(0).split(" ");
+      .innerText();
+    const splitText = priceLocator.split(" ");
 
     return {
-      currency: splitText[0].at(-1),
+      currency: splitText.at(2)[0],
       amount: Number(splitText.at(2).slice(1)),
     };
   }
