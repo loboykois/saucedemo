@@ -35,16 +35,8 @@ export class OverviewSummary {
       .locator(`.summary_${byType}_label`)
       .innerText();
     const splitText = summaryLocator.split(" ");
-    let currency = "";
-    let amount = 0;
-
-    if (splitText.length < 3) {
-      currency = splitText.at(1)[0];
-      amount = Number(splitText.at(1).slice(1));
-    } else {
-      currency = splitText.at(2)[0];
-      amount = Number(splitText.at(2).slice(1));
-    }
+    const currency = splitText.at(-1)?.at(0);
+    const amount = Number(splitText.at(-1)?.slice(1));
 
     return {
       currency,

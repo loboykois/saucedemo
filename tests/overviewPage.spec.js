@@ -150,21 +150,12 @@ test.describe("Checkout: Overview test suite", () => {
 
     const overviewPage = new OverviewPage(page);
 
-    const itemTotal = await overviewPage.summary.getPriceInfoByType(
-      priceType.item
-    );
-    const itemAmount = itemTotal.amount;
+    const itemTotal = await overviewPage.summary.getPriceInfoByType(priceType.item);
+    const taxPrice = await overviewPage.summary.getPriceInfoByType(priceType.tax);
+    const sum = itemTotal.amount + taxPrice.amount;
 
-    const tax = await overviewPage.summary.getPriceInfoByType(priceType.tax);
-    const taxAmount = tax.amount;
+    const totalPrice = await overviewPage.summary.getPriceInfoByType(priceType.totalPrice);
 
-    const sum = itemAmount + taxAmount;
-
-    const total = await overviewPage.summary.getPriceInfoByType(
-      priceType.totalPrice
-    );
-    const totalAmount = total.amount;
-
-    expect(totalAmount).toBe(sum);
+    expect(totalPrice.amount).toBe(sum);
   });
 });

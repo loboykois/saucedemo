@@ -18,9 +18,9 @@ export class CompletePage extends BasePage {
 
   //   TODO: get to know hov to do visual comparisons with playwright
 
-//   async getPonyIconHandler() {
-//     await this.#page.locator(".pony_express");
-//   }
+  getPonyIcon() {
+    return this.#page.locator(".pony_express");
+  }
 
   async pressBackHome() {
     await this.#page.locator('button:has-text("Back Home")').click();

@@ -13,28 +13,28 @@ test.describe("Checkout: Complete test suite", () => {
   });
 
   //  TODO: fix problem with visual comparisons
-  //   test("Should display Pony Express icon when user has dispatched order", async ({
-  //     page,
-  //   }) => {
-  //     const inventoryArea = new ProductsPage(page);
+  test("Should display Pony Express icon when user has dispatched order", async ({
+    page,
+  }) => {
+    const inventoryArea = new ProductsPage(page);
 
-  //     await inventoryArea.openCartPage();
+    await inventoryArea.openCartPage();
 
-  //     const shoppingCart = new ShoppingCartPage(page);
-  //     await shoppingCart.checkOut();
+    const shoppingCart = new ShoppingCartPage(page);
+    await shoppingCart.checkOut();
 
-  //     const checkOutPage = new CheckoutPage(page);
-  //     await checkOutPage.checkoutFrom.firstName.fill(fakeFormData.firstName);
-  //     await checkOutPage.checkoutFrom.lastName.fill(fakeFormData.lastName);
-  //     await checkOutPage.checkoutFrom.postalCode.fill(fakeFormData.postalCode);
-  //     await checkOutPage.pressContinue();
+    const checkOutPage = new CheckoutPage(page);
+    await checkOutPage.checkoutFrom.firstName.fill(fakeFormData.firstName);
+    await checkOutPage.checkoutFrom.lastName.fill(fakeFormData.lastName);
+    await checkOutPage.checkoutFrom.postalCode.fill(fakeFormData.postalCode);
+    await checkOutPage.pressContinue();
 
-  //     const overviewPage = new OverviewPage(page);
-  //     await overviewPage.finishOrder();
+    const overviewPage = new OverviewPage(page);
+    await overviewPage.finishOrder();
 
-  //     const completePage = new CompletePage(page);
-  //     const ponyIcon = await completePage.getPonyIconHandler();
+    const completePage = new CompletePage(page);
+    const ponyIcon = completePage.getPonyIcon();
 
-  //     expect(ponyIcon).toHaveScreenshot("pony-express-icon.png");
-  //   });
+    await expect(ponyIcon).toHaveScreenshot();
+  });
 });

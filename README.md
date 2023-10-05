@@ -11,11 +11,13 @@
    </a>
 </p>
 
-## Project about automatically testing of the SauceDemo open-resource using Playwright framework
+## Overview
 
-This application is a set of technologies that will help every QA acquire basic web automation testing skills and become a truly good specialist.
+Set of sample test cases to verify http://saucedemo.com web application.  
 
-Technologies:
+Here you will find set of samples that might help QA to acquire basic web automation testing skills and become a truly good specialist.
+
+What's inside:
 
 - Java Script basic skills
 - OOP (page object model)
@@ -25,19 +27,15 @@ Technologies:
 - Conventional commits
 - Semantic versioning
 
-### How To Install:
+### Running tests
 
-- clone repository from github - https://github.com/loboykois/saucedemo/tree/main
+- `npm ci`
+- `npm init playwright@latest` - to install latest Playwright version
+- `npx playwright test`
 
-- install Playwright using npm command - `npm init playwright@latest` to install the latest version of Playwright framework
+### Work in progress
 
-### How to Use:
-
-- start testing using Terminal - `npx playwright test`
-
-### Known issues (Work in progress):
-
-The overview tests suite still not finished and have some issues. Its will be fixed soon!
+The Overview tests suite still not finished and has some issues.
 
 ### Like this project?
 
