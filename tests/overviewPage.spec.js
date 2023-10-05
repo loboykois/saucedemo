@@ -6,7 +6,6 @@ import { fakeFormData } from "./tools/fakeFormData";
 import { loginAsStandardUser } from "./tools/authorization";
 import { OverviewPage } from "../pageObjects/overviewPage/overviewPage";
 import { priceType } from "../pageObjects/overviewPage/overviewSummary";
-import { Console } from "console";
 
 test.describe("Checkout: Overview test suite", () => {
   test.beforeEach(async ({ page }) => {
@@ -154,18 +153,18 @@ test.describe("Checkout: Overview test suite", () => {
     const itemTotal = await overviewPage.summary.getPriceInfoByType(
       priceType.item
     );
-    const itemTotalValue = itemTotal.amount;
+    const itemAmount = itemTotal.amount;
 
     const tax = await overviewPage.summary.getPriceInfoByType(priceType.tax);
-    const taxValue = tax.amount;
+    const taxAmount = tax.amount;
 
-    const sum = itemTotalValue + taxValue;
+    const sum = itemAmount + taxAmount;
 
     const total = await overviewPage.summary.getPriceInfoByType(
       priceType.totalPrice
     );
-    const totalValue = total.amount;
+    const totalAmount = total.amount;
 
-    expect(totalValue).toBe(sum);
+    expect(totalAmount).toBe(sum);
   });
 });

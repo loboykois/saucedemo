@@ -31,14 +31,24 @@ export class OverviewSummary {
   }
 
   async getPriceInfoByType(byType) {
-    const priceLocator = await this.#page
+    const summaryLocator = await this.#page
       .locator(`.summary_${byType}_label`)
       .innerText();
-    const splitText = priceLocator.split(" ");
+    const splitText = summaryLocator.split(" ");
+    let currency = "";
+    let amount = 0;
+
+    if (splitText.length < 3) {
+      currency = splitText.at(1)[0];
+      amount = Number(splitText.at(1).slice(1));
+    } else {
+      currency = splitText.at(2)[0];
+      amount = Number(splitText.at(2).slice(1));
+    }
 
     return {
-      currency: splitText.at(2)[0],
-      amount: Number(splitText.at(2).slice(1)),
+      currency,
+      amount,
     };
   }
 }
