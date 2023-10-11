@@ -4,6 +4,8 @@ on:
     branches: main
   pull_request:
     branches: main
+  schedule:
+    - cron: "0 11 * * *"
 jobs:
   sauce_demo_tests:
     runs-on: ubuntu-latest
