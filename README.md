@@ -2,6 +2,10 @@
    <img src="/Saucedemo_Automation_Testing_Project.png" alt="SauceDemo">
 </h1>
 
+<!-- # SauceDemo Automation Testing project -->
+
+<!-- ![Sauce Demo Tests](https://github.com/loboykois/saucedemo/actions/workflows/sauceDemoTests.yml/badge.svg) -->
+
 <p align="center">
    <a href="https://img.shields.io/badge/language-JavaScript">
       <img src="https://img.shields.io/badge/language-JavaScript-black?color=%23ffff00" alt="javascript">
@@ -9,11 +13,14 @@
    <a href="https://img.shields.io/badge/framework-Playwright-black">
       <img src="https://img.shields.io/badge/framework-Playwright-black?color=%2345ba4b" alt="playwright">
    </a>
+   <a href="https://github.com/loboykois/saucedemo/actions/workflows/sauceDemoTests.yml">
+      <img src="https://img.shields.io/badge/framework-Playwright-black?color=%2345ba4b" alt="playwright">
+   </a>
 </p>
 
 ## Overview
 
-Set of sample test cases to verify http://saucedemo.com web application.  
+Set of sample test cases to verify http://saucedemo.com web application.
 
 Here you will find set of samples that might help QA to acquire basic web automation testing skills and become a truly good specialist.
 

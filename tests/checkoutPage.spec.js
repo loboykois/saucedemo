@@ -5,15 +5,7 @@ import { ShoppingCartPage } from "../pageObjects/shoppingCartPage/shoppingCartPa
 import { CheckoutPage } from "../pageObjects/checkoutPage/checkoutPage";
 import { fakeFormData } from "./tools/fakeFormData";
 
-
-
 test.describe("Checkout page test suite", () => {
-  //   const fakeFormData = {
-  //     firstName: "test",
-  //     lastName: "test2",
-  //     postalCode: "12345",
-  //   };
-
   test.beforeEach(async ({ page }) => {
     const loginPage = new SwagLabsLoginPage(page);
     await loginPage.visitLoginPage();
@@ -34,26 +26,14 @@ test.describe("Checkout page test suite", () => {
   test("When user clicked on Checkout button should navigate to checkout form", async ({
     page,
   }) => {
-    //  const inventoryArea = new ProductsPage(page);
-    //  await inventoryArea.openCartPage();
-
-    //  const shoppingCart = new ShoppingCartPage(page);
-    //  await shoppingCart.checkOut();
-
     await expect(page).toHaveURL(
-      "https://www.saucedemo.com/checkout-step-one.html"
+      "https://www.saucedemo.com/checkout-step-one.html",
     );
   });
 
   test("When user navigated to checkout page should display user info form", async ({
     page,
   }) => {
-    //  const inventoryArea = new ProductsPage(page);
-    //  await inventoryArea.openCartPage();
-
-    //  const shoppingCart = new ShoppingCartPage(page);
-    //  await shoppingCart.checkOut();
-
     const checkOutPage = new CheckoutPage(page);
     const checkoutFormLocator = await checkOutPage.checkoutFrom.formLocator;
 
@@ -61,14 +41,6 @@ test.describe("Checkout page test suite", () => {
   });
 
   test.describe("When user does not fill || filled", () => {
-    //  test.beforeEach(async ({ page }) => {
-    //    const inventoryArea = new ProductsPage(page);
-    //    await inventoryArea.openCartPage();
-
-    //    const shoppingCart = new ShoppingCartPage(page);
-    //    await shoppingCart.checkOut();
-    //  });
-
     test("any information in checkout form should display error", async ({
       page,
     }) => {
@@ -122,7 +94,7 @@ test.describe("Checkout page test suite", () => {
       await checkOutPage.pressContinue();
 
       await expect(page).toHaveURL(
-        "https://www.saucedemo.com/checkout-step-two.html"
+        "https://www.saucedemo.com/checkout-step-two.html",
       );
     });
   });
@@ -130,12 +102,7 @@ test.describe("Checkout page test suite", () => {
   test("all information in form should be navigated to Overview page", async ({
     page,
   }) => {
-    //  const inventoryArea = new ProductsPage(page);
-    //  await inventoryArea.openCartPage();
-
-    //  const shoppingCart = new ShoppingCartPage(page);
-    //  await shoppingCart.checkOut();
-
+    const testQuote = "test";
     const checkOutPage = new CheckoutPage(page);
     await checkOutPage.checkoutFrom.firstName.fill(fakeFormData.firstName);
     await checkOutPage.checkoutFrom.lastName.fill(fakeFormData.lastName);
@@ -143,7 +110,7 @@ test.describe("Checkout page test suite", () => {
     await checkOutPage.pressContinue();
 
     await expect(page).toHaveURL(
-      "https://www.saucedemo.com/checkout-step-two.html"
+      "https://www.saucedemo.com/checkout-step-two.html",
     );
   });
 });
