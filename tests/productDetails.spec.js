@@ -25,7 +25,7 @@ test.describe("Product details test suite", () => {
 
     await productsItems[1].openDetailedProductDescription("image");
     await expect(page).toHaveURL(
-      "https://www.saucedemo.com/inventory-item.html?id=0"
+      "https://www.saucedemo.com/inventory-item.html?id=0",
     );
 
     await detailsArea.backToProducts();
@@ -41,7 +41,7 @@ test.describe("Product details test suite", () => {
     const detailsPage = new ProductDetailsPage(page);
 
     expect(await detailsPage.productItem.getItemTitle()).toBe(
-      "Sauce Labs Bike Light"
+      "Sauce Labs Bike Light",
     );
   });
 });
