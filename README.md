@@ -1,10 +1,4 @@
-<h1 align="center">
-   <img src="/Saucedemo_Automation_Testing_Project.png" alt="SauceDemo">
-</h1>
-
-<!-- # SauceDemo Automation Testing project -->
-
-<!-- ![Sauce Demo Tests](https://github.com/loboykois/saucedemo/actions/workflows/sauceDemoTests.yml/badge.svg) -->
+# SauceDemo Automation Testing project
 
 <p align="center">
    <a href="https://img.shields.io/badge/language-JavaScript">
@@ -15,6 +9,9 @@
    </a>
    <a href="https://github.com/loboykois/saucedemo/actions/workflows/sauceDemoTests.yml">
       <img src="https://img.shields.io/badge/framework-Playwright-black?color=%2345ba4b" alt="playwright">
+   </a> 
+   <a href="https://github.com/loboykois/saucedemo/actions/workflows/sauceDemoTests.yml">
+      <img src="https://github.com/loboykois/saucedemo/actions/workflows/sauceDemoTests.yml/badge.svg?branch=main" />
    </a>
 </p>
 
