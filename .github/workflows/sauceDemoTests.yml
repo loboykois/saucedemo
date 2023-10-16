@@ -24,7 +24,7 @@ jobs:
         run: npm test
       - name: Download test report
         uses: actions/upload-artifact@v3
-        if: failure()
+        if: always()
         with:
           name: sauceDemo_test_report
           path: playwright-report/
